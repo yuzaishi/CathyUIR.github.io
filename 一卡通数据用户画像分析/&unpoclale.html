@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <title>&unpoclasle</title>
+     <!-- 引入 echarts.js -->
+    <script src="echarts.min.js"></script>
+</head>
+<body>
+<div id="main" style="width: 600px;height:400px;float:center;top:100px;left:350px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '本科生研究生借出图书种类数目对比',
+                x:"center"
+            },
+            tooltip: {},
+            legend: {
+                data:['本科生','研究生']
+                 <!--y: 'bottom'//图例说明文字设置-->
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '10%',
+                top:'10%',
+                containLabel: true
+            },
+            toolbox:{
+                show:true
+            },
+            calculable : true,
+            xAxis: [{
+                type:'category',
+                axisLabel:{ //调整x轴的lable
+                    textStyle:{
+                    fontSize:14 // 让字体变
+                    }
+                },
+                nameRotate:[],
+                data: ['I', 'D', 'H', 'K', 'F', 'B', 'G', 'TP', 'C', 'J', 'A', 'E', 'TS']
+                }],
+            yAxis: [{
+                type:'value',
+		max:3600
+                //data:[2166, 2108, 1365, 785, 772, 448, 428, 63]
+            }],
+
+            series: [
+            {
+                name: '本科生借出数目',
+                type: 'bar',
+                data: [2557, 2036, 1515, 737, 691, 599, 391, 252, 239, 76, 60, 44, 26],
+		
+                markLine : {
+                data : [
+                    {type : 'average', name: '平均值'}
+                ]
+                }
+            },
+            {
+                name: '研究生借出数目',
+                type: 'bar',
+                data:[1016,3465,1270,575, 526, 515, 260, 219, 145,44,39,112,34],
+		
+                markLine : {
+                data : [
+                    {type : 'average', name: '平均值'}
+                ]
+                }
+            }],
+                label: {
+                    show: true, //开启显示
+                    position: 'top', //在上方显示
+                    textStyle: { //数值样式
+                        color: 'black',
+                        fontSize: 8,
+                        fontWeight: 400
+    			    }
+    		    }
+
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
