@@ -1,0 +1,1363 @@
+<!doctype html >
+<html lang="ch">
+<head>
+    <meta charset='UTF-8'>
+    <title>图书馆数据分析</title>
+    <link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext'
+          rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="sub.css" type="text/css"/>
+    <style type='text/css'>html {
+        overflow-x: initial !important;
+    }
+
+    :root {
+        --bg-color: #ffffff;
+        --text-color: #333333;
+        --select-text-bg-color: #B5D6FC;
+        --select-text-font-color: auto;
+        --monospace: "Lucida Console", Consolas, "Courier", monospace;
+    }
+
+    html {
+        font-size: 14px;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+        margin: 0px;
+        padding: 0px;
+        height: auto;
+        bottom: 0px;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        font-size: 1rem;
+        line-height: 1.42857;
+        overflow-x: hidden;
+        background: inherit;
+    }
+
+    iframe {
+        margin: auto;
+    }
+
+    a.url {
+        word-break: break-all;
+    }
+
+    a:active, a:hover {
+        outline: 0px;
+    }
+
+    .in-text-selection, ::selection {
+        text-shadow: none;
+        background: var(--select-text-bg-color);
+        color: var(--select-text-font-color);
+    }
+
+    #write {
+        margin: 0px auto;
+        height: auto;
+        width: inherit;
+        word-break: normal;
+        word-wrap: break-word;
+        position: relative;
+        white-space: normal;
+        overflow-x: visible;
+        padding-top: 40px;
+
+    }
+
+    #write.first-line-indent p {
+        text-indent: 2em;
+    }
+
+    #write.first-line-indent li p, #write.first-line-indent p * {
+        text-indent: 0px;
+    }
+
+    #write.first-line-indent li {
+        margin-left: 2em;
+    }
+
+    .for-image #write {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    body.typora-export {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .typora-export .footnote-line, .typora-export li, .typora-export p {
+        white-space: pre-wrap;
+    }
+
+    @media screen and (max-width: 500px) {
+        body.typora-export {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        #write {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .CodeMirror-sizer {
+            margin-left: 0px !important;
+        }
+
+        .CodeMirror-gutters {
+            display: none !important;
+        }
+    }
+
+    #write li > figure:first-child {
+        margin-top: -20px;
+    }
+
+    #write ol, #write ul {
+        position: relative;
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: middle;
+    }
+
+    button, input, select, textarea {
+        color: inherit;
+        font-style: inherit;
+        font-variant: inherit;
+        font-weight: inherit;
+        font-stretch: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        font-family: inherit;
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+        line-height: normal;
+        padding: 0px;
+    }
+
+    *, ::after, ::before {
+        box-sizing: border-box;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre {
+        width: inherit;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p {
+        position: relative;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        break-after: avoid-page;
+        break-inside: avoid;
+        orphans: 2;
+    }
+
+    p {
+        orphans: 4;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.6rem;
+    }
+
+    h4 {
+        font-size: 1.4rem;
+    }
+
+    h5 {
+        font-size: 1.2rem;
+    }
+
+    h6 {
+        font-size: 1rem;
+    }
+
+    .md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .md-blockmeta {
+        color: rgb(204, 204, 204);
+        font-weight: 700;
+        font-style: italic;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    sup.md-footnote {
+        padding: 2px 4px;
+        background-color: rgba(238, 238, 238, 0.7);
+        color: rgb(85, 85, 85);
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    sup.md-footnote a, sup.md-footnote a:hover {
+        color: inherit;
+        text-transform: inherit;
+        text-decoration: inherit;
+    }
+
+    #write input[type="checkbox"] {
+        cursor: pointer;
+        width: inherit;
+        height: inherit;
+    }
+
+    figure {
+        overflow-x: auto;
+        margin: 1.2em 0px;
+        max-width: calc(100% + 16px);
+        padding: 0px;
+    }
+
+    figure > table {
+        margin: 0px !important;
+    }
+
+    tr {
+        break-inside: avoid;
+        break-after: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+        width: 100%;
+        overflow: auto;
+        break-inside: auto;
+        text-align: left;
+    }
+
+    table.md-table td {
+        min-width: 32px;
+    }
+
+    .CodeMirror-gutters {
+        border-right: 0px;
+        background-color: inherit;
+    }
+
+    .CodeMirror {
+        text-align: left;
+    }
+
+    .CodeMirror-placeholder {
+        opacity: 0.3;
+    }
+
+    .CodeMirror pre {
+        padding: 0px 4px;
+    }
+
+    .CodeMirror-lines {
+        padding: 0px;
+    }
+
+    div.hr:focus {
+        cursor: none;
+    }
+
+    #write pre {
+        white-space: pre-wrap;
+    }
+
+    #write.fences-no-line-wrapping pre {
+        white-space: pre;
+    }
+
+    #write pre.ty-contain-cm {
+        white-space: normal;
+    }
+
+    .CodeMirror-gutters {
+        margin-right: 4px;
+    }
+
+    .md-fences {
+        font-size: 0.9rem;
+        display: block;
+        break-inside: avoid;
+        text-align: left;
+        overflow: visible;
+        white-space: pre;
+        background: inherit;
+        position: relative !important;
+    }
+
+    .md-diagram-panel {
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+        padding-top: 0px;
+        padding-bottom: 8px;
+        overflow-x: auto;
+    }
+
+    #write .md-fences.mock-cm {
+        white-space: pre-wrap;
+    }
+
+    .md-fences.md-fences-with-lineno {
+        padding-left: 0px;
+    }
+
+    #write.fences-no-line-wrapping .md-fences.mock-cm {
+        white-space: pre;
+        overflow-x: auto;
+    }
+
+    .md-fences.mock-cm.md-fences-with-lineno {
+        padding-left: 8px;
+    }
+
+    .CodeMirror-line, twitterwidget {
+        break-inside: avoid;
+    }
+
+    .footnotes {
+        opacity: 0.8;
+        font-size: 0.9rem;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    .footnotes + .footnotes {
+        margin-top: 0px;
+    }
+
+    .md-reset {
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        outline: 0px;
+        vertical-align: top;
+        background: 0px 0px;
+        text-decoration: none;
+        text-shadow: none;
+        float: none;
+        position: static;
+        width: auto;
+        height: auto;
+        white-space: nowrap;
+        cursor: inherit;
+        -webkit-tap-highlight-color: transparent;
+        line-height: normal;
+        font-weight: 400;
+        text-align: left;
+        box-sizing: content-box;
+        direction: ltr;
+    }
+
+    li div {
+        padding-top: 0px;
+    }
+
+    blockquote {
+        margin: 1rem 0px;
+    }
+
+    li .mathjax-block, li p {
+        margin: 0.5rem 0px;
+    }
+
+    li {
+        margin: 0px;
+        position: relative;
+    }
+
+    blockquote > :last-child {
+        margin-bottom: 0px;
+    }
+
+    blockquote > :first-child, li > :first-child {
+        margin-top: 0px;
+    }
+
+    .footnotes-area {
+        color: rgb(136, 136, 136);
+        margin-top: 0.714rem;
+        padding-bottom: 0.143rem;
+        white-space: normal;
+    }
+
+    #write .footnote-line {
+        white-space: pre-wrap;
+    }
+
+    @media print {
+        body, html {
+            border: 1px solid transparent;
+            height: 99%;
+            break-after: avoid;
+            break-before: avoid;
+        }
+
+        #write {
+            margin-top: 0px;
+            padding-top: 0px;
+            border-color: transparent !important;
+        }
+
+        .typora-export * {
+            -webkit-print-color-adjust: exact;
+        }
+
+        html.blink-to-pdf {
+            font-size: 13px;
+        }
+
+        .typora-export #write {
+            padding-left: 32px;
+            padding-right: 32px;
+            padding-bottom: 0px;
+            break-after: avoid;
+        }
+
+        .typora-export #write::after {
+            height: 0px;
+        }
+
+        @page {
+            margin: 20mm 0px;
+        }
+    }
+
+    .footnote-line {
+        margin-top: 0.714em;
+        font-size: 0.7em;
+    }
+
+    a img, img a {
+        cursor: pointer;
+    }
+
+    pre.md-meta-block {
+        font-size: 0.8rem;
+        min-height: 0.8rem;
+        white-space: pre-wrap;
+        background: rgb(204, 204, 204);
+        display: block;
+        overflow-x: hidden;
+    }
+
+    p > .md-image:only-child:not(.md-img-error) img, p > img:only-child {
+        display: block;
+        margin: auto;
+    }
+
+    p > .md-image:only-child {
+        display: inline-block;
+        width: 100%;
+    }
+
+    #write .MathJax_Display {
+        margin: 0.8em 0px 0px;
+    }
+
+    .md-math-block {
+        width: 100%;
+    }
+
+    .md-math-block:not(:empty)::after {
+        display: none;
+    }
+
+    [contenteditable="true"]:active, [contenteditable="true"]:focus {
+        outline: 0px;
+        box-shadow: none;
+    }
+
+    .md-task-list-item {
+        position: relative;
+        list-style-type: none;
+    }
+
+    .task-list-item.md-task-list-item {
+        padding-left: 0px;
+    }
+
+    .md-task-list-item > input {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        margin-left: -1.2em;
+        margin-top: calc(1em - 10px);
+    }
+
+    .math {
+        font-size: 1rem;
+    }
+
+    .md-toc {
+        min-height: 3.58rem;
+        position: relative;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+    .md-toc-content {
+        position: relative;
+        margin-left: 0px;
+    }
+
+    .md-toc-content::after, .md-toc::after {
+        display: none;
+    }
+
+    .md-toc-item {
+        display: block;
+        color: rgb(65, 131, 196);
+    }
+
+    .md-toc-item a {
+        text-decoration: none;
+    }
+
+    .md-toc-inner:hover {
+        text-decoration: underline;
+    }
+
+    .md-toc-inner {
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .md-toc-h1 .md-toc-inner {
+        margin-left: 0px;
+        font-weight: 700;
+    }
+
+    .md-toc-h2 .md-toc-inner {
+        margin-left: 2em;
+    }
+
+    .md-toc-h3 .md-toc-inner {
+        margin-left: 4em;
+    }
+
+    .md-toc-h4 .md-toc-inner {
+        margin-left: 6em;
+    }
+
+    .md-toc-h5 .md-toc-inner {
+        margin-left: 8em;
+    }
+
+    .md-toc-h6 .md-toc-inner {
+        margin-left: 10em;
+    }
+
+    @media screen and (max-width: 48em) {
+        .md-toc-h3 .md-toc-inner {
+            margin-left: 3.5em;
+        }
+
+        .md-toc-h4 .md-toc-inner {
+            margin-left: 5em;
+        }
+
+        .md-toc-h5 .md-toc-inner {
+            margin-left: 6.5em;
+        }
+
+        .md-toc-h6 .md-toc-inner {
+            margin-left: 8em;
+        }
+    }
+
+    a.md-toc-inner {
+        font-size: inherit;
+        font-style: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+    }
+
+    .footnote-line a:not(.reversefootnote) {
+        color: inherit;
+    }
+
+    .md-attr {
+        display: none;
+    }
+
+    .md-fn-count::after {
+        content: ".";
+    }
+
+    code, pre, samp, tt {
+        font-family: var(--monospace);
+    }
+
+    kbd {
+        margin: 0px 0.1em;
+        padding: 0.1em 0.6em;
+        font-size: 0.8em;
+        color: rgb(36, 39, 41);
+        background: rgb(255, 255, 255);
+        border: 1px solid rgb(173, 179, 185);
+        border-radius: 3px;
+        box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    .md-comment {
+        color: rgb(162, 127, 3);
+        opacity: 0.8;
+        font-family: var(--monospace);
+    }
+
+    code {
+        text-align: left;
+        vertical-align: initial;
+    }
+
+    a.md-print-anchor {
+        white-space: pre !important;
+        border-width: initial !important;
+        border-style: none !important;
+        border-color: initial !important;
+        display: inline-block !important;
+        position: absolute !important;
+        width: 1px !important;
+        right: 0px !important;
+        outline: 0px !important;
+        background: 0px 0px !important;
+        text-decoration: initial !important;
+        text-shadow: initial !important;
+    }
+
+    .md-inline-math .MathJax_SVG .noError {
+        display: none !important;
+    }
+
+    .html-for-mac .inline-math-svg .MathJax_SVG {
+        vertical-align: 0.2px;
+    }
+
+    .md-math-block .MathJax_SVG_Display {
+        text-align: center;
+        margin: 0px;
+        position: relative;
+        text-indent: 0px;
+        max-width: none;
+        max-height: none;
+        min-height: 0px;
+        min-width: 100%;
+        width: auto;
+        overflow-y: hidden;
+        display: block !important;
+    }
+
+    .MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display {
+        width: auto;
+        margin: inherit;
+        display: inline-block !important;
+    }
+
+    .MathJax_SVG .MJX-monospace {
+        font-family: var(--monospace);
+    }
+
+    .MathJax_SVG .MJX-sans-serif {
+        font-family: sans-serif;
+    }
+
+    .MathJax_SVG {
+        display: inline;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        zoom: 90%;
+        text-indent: 0px;
+        text-align: left;
+        text-transform: none;
+        letter-spacing: normal;
+        word-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        float: none;
+        direction: ltr;
+        max-width: none;
+        max-height: none;
+        min-width: 0px;
+        min-height: 0px;
+        border: 0px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .MathJax_SVG * {
+        transition: none;
+    }
+
+    .MathJax_SVG_Display svg {
+        vertical-align: middle !important;
+        margin-bottom: 0px !important;
+    }
+
+    .os-windows.monocolor-emoji .md-emoji {
+        font-family: "Segoe UI Symbol", sans-serif;
+    }
+
+    .md-diagram-panel > svg {
+        max-width: 100%;
+    }
+
+    [lang="mermaid"] svg, [lang="flow"] svg {
+        max-width: 100%;
+    }
+
+    [lang="mermaid"] .node text {
+        font-size: 1rem;
+    }
+
+    table tr th {
+        border-bottom: 0px;
+    }
+
+    video {
+        max-width: 100%;
+        display: block;
+        margin: 0px auto;
+    }
+
+    iframe {
+        max-width: 100%;
+        width: 100%;
+        border: none;
+    }
+
+    .highlight td, .highlight tr {
+        border: 0px;
+    }
+
+
+    :root {
+        --side-bar-bg-color: #fafafa;
+        --control-text-color: #777;
+    }
+
+    html {
+        font-size: 16px;
+    }
+
+    body {
+        font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: rgb(51, 51, 51);
+        line-height: 1.6;
+    }
+
+    #write {
+        max-width: 860px;
+        margin: 0px auto;
+        padding: 0 20px 50px;
+    }
+
+    #write > ul:first-child, #write > ol:first-child {
+        margin-top: 30px;
+    }
+
+    a {
+        color: rgb(65, 131, 196);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        position: relative;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+        line-height: 1.4;
+        cursor: text;
+    }
+
+    h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+        text-decoration: none;
+    }
+
+    h1 tt, h1 code {
+        font-size: inherit;
+    }
+
+    h2 tt, h2 code {
+        font-size: inherit;
+    }
+
+    h3 tt, h3 code {
+        font-size: inherit;
+    }
+
+    h4 tt, h4 code {
+        font-size: inherit;
+    }
+
+    h5 tt, h5 code {
+        font-size: inherit;
+    }
+
+    h6 tt, h6 code {
+        font-size: inherit;
+    }
+
+    h1 {
+        padding-bottom: 0.1em;
+        font-size: 2.25em;
+        line-height: 1.2;
+        border-bottom: 1px solid rgb(238, 238, 238);
+    }
+
+    h2 {
+        padding-bottom: 0.3em;
+        font-size: 1.75em;
+        line-height: 1.225;
+        border-bottom: 1px solid rgb(238, 238, 238);
+    }
+
+    h3 {
+        font-size: 1.5em;
+        line-height: 1.43;
+    }
+
+    h4 {
+        font-size: 1.25em;
+    }
+
+    h5 {
+        font-size: 1em;
+    }
+
+    h6 {
+        font-size: 1em;
+        color: rgb(119, 119, 119);
+    }
+
+    p, blockquote, ul, ol, dl, table {
+        margin: 0.8em 0px;
+    }
+
+    li > ol, li > ul {
+        margin: 0px;
+    }
+
+    hr {
+        height: 2px;
+        padding: 0px;
+        margin: 16px 0px;
+        background-color: rgb(231, 231, 231);
+        border: 0px none;
+        overflow: hidden;
+        box-sizing: content-box;
+    }
+
+    li p.first {
+        display: inline-block;
+    }
+
+    ul, ol {
+        padding-left: 30px;
+    }
+
+    ul:first-child, ol:first-child {
+        margin-top: 0px;
+    }
+
+    ul:last-child, ol:last-child {
+        margin-bottom: 0px;
+    }
+
+    blockquote {
+        border-left: 4px solid rgb(223, 226, 229);
+        padding: 0px 15px;
+        color: rgb(119, 119, 119);
+    }
+
+    blockquote blockquote {
+        padding-right: 0px;
+    }
+
+    table {
+        padding: 0px;
+        word-break: initial;
+    }
+
+    table tr {
+        border-top: 1px solid rgb(223, 226, 229);
+        margin: 0px;
+        padding: 0px;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: rgb(248, 248, 248);
+    }
+
+    table tr th {
+        font-weight: bold;
+        border-width: 1px 1px 0px;
+        border-top-style: solid;
+        border-right-style: solid;
+        border-left-style: solid;
+        border-top-color: rgb(223, 226, 229);
+        border-right-color: rgb(223, 226, 229);
+        border-left-color: rgb(223, 226, 229);
+        border-image: initial;
+        border-bottom-style: initial;
+        border-bottom-color: initial;
+        text-align: left;
+        margin: 0px;
+        padding: 6px 13px;
+    }
+
+    table tr td {
+        border: 1px solid rgb(223, 226, 229);
+        text-align: left;
+        margin: 0px;
+        padding: 6px 13px;
+    }
+
+    table tr th:first-child, table tr td:first-child {
+        margin-top: 0px;
+    }
+
+    table tr th:last-child, table tr td:last-child {
+        margin-bottom: 0px;
+    }
+
+    .CodeMirror-lines {
+        padding-left: 4px;
+    }
+
+    .code-tooltip {
+        box-shadow: rgba(0, 28, 36, 0.3) 0px 1px 1px 0px;
+        border-top: 1px solid rgb(238, 242, 242);
+    }
+
+    .md-fences, code, tt {
+        border: 1px solid rgb(231, 234, 237);
+        background-color: rgb(248, 248, 248);
+        border-radius: 3px;
+        padding: 2px 4px 0px;
+        font-size: 0.9em;
+    }
+
+    code {
+        background-color: rgb(243, 244, 244);
+        padding: 0px 2px;
+    }
+
+    .md-fences {
+        margin-bottom: 15px;
+        margin-top: 15px;
+        padding-top: 8px;
+        padding-bottom: 6px;
+    }
+
+    .md-task-list-item > input {
+        margin-left: -1.3em;
+    }
+
+    @media print {
+        html {
+            font-size: 13px;
+        }
+
+        table, pre {
+            break-inside: avoid;
+        }
+
+        pre {
+            word-wrap: break-word;
+        }
+    }
+
+    .md-fences {
+        background-color: rgb(248, 248, 248);
+    }
+
+    #write pre.md-meta-block {
+        padding: 1rem;
+        font-size: 85%;
+        line-height: 1.45;
+        background-color: rgb(247, 247, 247);
+        border: 0px;
+        border-radius: 3px;
+        color: rgb(119, 119, 119);
+        margin-top: 0px !important;
+    }
+
+    .mathjax-block > .code-tooltip {
+        bottom: 0.375rem;
+    }
+
+    .md-mathjax-midline {
+        background: rgb(250, 250, 250);
+    }
+
+    #write > h3.md-focus::before {
+        left: -1.5625rem;
+        top: 0.375rem;
+    }
+
+    #write > h4.md-focus::before {
+        left: -1.5625rem;
+        top: 0.285714rem;
+    }
+
+    #write > h5.md-focus::before {
+        left: -1.5625rem;
+        top: 0.285714rem;
+    }
+
+    #write > h6.md-focus::before {
+        left: -1.5625rem;
+        top: 0.285714rem;
+    }
+
+    .md-image > .md-meta {
+        border-radius: 3px;
+        padding: 2px 0px 0px 4px;
+        font-size: 0.9em;
+        color: inherit;
+    }
+
+    .md-tag {
+        color: rgb(167, 167, 167);
+        opacity: 1;
+    }
+
+    .md-toc {
+        margin-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .sidebar-tabs {
+        border-bottom: none;
+    }
+
+    #typora-quick-open {
+        border: 1px solid rgb(221, 221, 221);
+        background-color: rgb(248, 248, 248);
+    }
+
+    #typora-quick-open-item {
+        background-color: rgb(250, 250, 250);
+        border-color: rgb(254, 254, 254) rgb(229, 229, 229) rgb(229, 229, 229) rgb(238, 238, 238);
+        border-style: solid;
+        border-width: 1px;
+    }
+
+    .on-focus-mode blockquote {
+        border-left-color: rgba(85, 85, 85, 0.12);
+    }
+
+    header, .context-menu, .megamenu-content, footer {
+        font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    .file-node-content:hover .file-node-icon, .file-node-content:hover .file-node-open-state {
+        visibility: visible;
+    }
+
+    .mac-seamless-mode #typora-sidebar {
+        background-color: var(--side-bar-bg-color);
+    }
+
+    .md-lang {
+        color: rgb(180, 101, 77);
+    }
+
+    .html-for-mac .context-menu {
+        --item-hover-bg-color: #E6F0FE;
+    }
+
+    #md-notification .btn {
+        border: 0px;
+    }
+
+    .dropdown-menu .divider {
+        border-color: rgb(229, 229, 229);
+    }
+
+
+    .typora-export li, .typora-export p, .typora-export, .footnote-line {
+        white-space: normal;
+    }
+    </style>
+</head>
+<body class='typora-export'>
+<div id="content">
+    <div id="logo">
+        <p style="left: 162px; top: 9px; padding:0 2px 2px; font-size: 14px;">基于校园一卡通数据的用户画像分析展示</p>
+        <h1 class="school"><strong>国际关系学院</strong></h1>
+        <h1>校园一卡通数据用户画像分析</h1>
+    </div>
+    <div class="uir"><img src="images/UIR0.png" alt="校徽" height=60px/></div>
+    <ul id="menu">
+        <li><a href="index.html">介绍</a></li>
+        <li><a class="current" href="libr.html">图书馆</a></li>
+        <li><a href="canteen.html">食堂</a></li>
+        <li><a href="bathroom.html">浴室</a></li>
+        <li><a href="end.html">总结</a></li>
+    </ul>
+    <div class="clear">
+        <!--<p>&nbsp;</p>-->
+        <p><br/>
+        </p>
+    </div>
+
+    <div id="left" style="width: 220px;">
+        <div class="caption"><p>索引</p></div>
+        <div class="box">
+            <ul>
+                <li><a href="#header-n96">各类书的借阅数量</a></li>
+                <li><a href="#header-n105">本科生研究生<br>借还书种类对比</a></li>
+                <li><a href="#header-n115">各系借还书数量对比</a></li>
+                <li><a href="#header-n126">各系别借还书<br>数量与类别数目对比</a></li>
+                <li><a href="#header-n195">关联规则挖掘<br>及综合分析</a></li>
+                <li><a href="#header-n245">各月借还书人数分析</a></li>
+                <li><a href="#header-n283">一天中各小时<br>借还书人数分析</a></li>
+                <li><a href="libr.html">回顶部</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id='write' class='is-node' style="border-right: 1px solid #B5D6FC;"><h1><a name='header-n94' class='md-header-anchor '></a>图书馆数据分析</h1>
+        <p>我们对于图书馆数据的分析，主要通过三个方面进行阐述：</p>
+    <ol>
+        <li>我们从分析各类图书的借阅数量入手，接着对研究生和本科生借阅图书的种类分开分析，为图书馆提出采购建议；然后我们分开对研究生和本科生各系的借还书数量进行分析，接着通过Cognos多维探测的方式研究各系别借还书数量与类别数目对比，分析各系同学的学习特点，为各系同学未来的学习提出合理科学的建议；最后根据各系同学借书的类别特点，帮助借书处为书籍放置规划提出建议。</li>
+        <li>接着我们将对借还书月份特点进行分析，向借书处的工作规划提出供参考的建议。</li>
+        <li>最后我们通过对一天内借还书小时分布特点的分析，为师生借还书时间安排提出建议。</li>
+    </ol>
+    <p>&nbsp;</p>
+        <h2><a name='header-n96' class='md-header-anchor '></a>各类书的借阅数量</h2>
+        <p><span>	</span>这里列出了学校借阅数量排名前14的书类的借阅数量：</p>
+        <p><img src='charts/libr/clale.png' alt='classlent'
+                referrerPolicy='no-referrer'/></p>
+        <p><span>	</span>以下是每个字母对应的图书种类：</p>
+        <p><img src='charts/libr/bookclass1.png' alt='bookclass'
+                width="360" height="400" style="float: left;margin:0 -5px 20px -10px;" referrerPolicy='no-referrer'/></p>
+        <!--<p><span>	</span>综合起来是这样：</p>-->
+        <p><img src='charts/libr/bookclass.png' alt='bookclass1'
+                width="340" height="405" style="float: right;margin:-10px 0px 25px 10px;" referrerPolicy='no-referrer'/></p>
+        <p><span>	</span>纵观图表数据，我校学生借阅的书籍都集中于社会科学类，其中前三大类最受欢迎的书籍为政治法律类、文学类、语言文字类书籍，且前十大热门书籍门类中只有计算机类不属于社会科学，可以看出我校文科氛围浓厚，同学们对政法、文学文字著作有着较为浓厚的兴趣。
+        </p>
+        <p>&nbsp;</p>
+        <h2><a name='header-n105' class='md-header-anchor '></a>本科生研究生借还书种类对比</h2>
+        <p>以下分别是本科生研究生的<a
+                href='&unpoclale.html'>借书种类对比图</a>和<a
+                href='&unpoclaret.html'>还书种类对比图</a>:</p>
+        <p><img src='charts/libr/&amp;unpoclale.png' alt='unpole'
+                referrerPolicy='no-referrer'/></p>
+        <p><img src='charts/libr/&amp;unpoclare.png' alt='unporet'
+                referrerPolicy='no-referrer'/></p>
+        <p><span>	</span>对比本科生、研究生借还书情况，发现研究生和本科生在借还书籍上的偏好接近，两个级部最常借还的前十类书籍中有九类是相同的：研究生较本科生偏爱军事类，本科生稍微偏爱轻工业、手工业。另外，本科生最喜欢文学类的图书，其次是政治法律方面，研究生对文学类的书籍兴趣较本科生而言较弱，更青睐政治法律类图书，借阅量远超第二名近三倍数量，超过本科生最高借阅量文学类书籍近一半数量。考虑到研究生人数较少，其借阅书本量仅略低于本科生整体借阅量，说明研究生更喜欢在图书馆借阅书籍、查阅资料。
+        </p>
+        <ul>
+            <li><p>采购建议</p>
+                <p><span>	</span>从借还图书总量来看，研究生和本科生相差无几，但研究生人数少于本科生，所以研究生相较本科生去图书馆借书需求量更大，图书馆在购书的过程中，应主要考虑研究生的需求。手工业，军事，艺术类的书籍借还数目较少，说明国关同学对以上方面感兴趣的人较少，其原因是因为国关不涉及相关专业，且该种类图书面向的群体较少，建议图书馆少购买相关种类书籍。
+                </p>
+                <p>&nbsp;</p></li>
+        </ul>
+        <h2><a name='header-n115' class='md-header-anchor '></a>各系借还书数量对比</h2>
+        <p>以下分别是研究生和本科生的各个系的借还图书数目的柱状图：</p>
+        <p><img src='charts/libr/podeple.png' alt='podeple' width="350"
+                style="float: left;margin-right:5px;" referrerPolicy='no-referrer'/>
+        </p>
+        <p><img src='charts/libr/undeple.png' alt='undeple' width="350"
+                style="float: right;margin-right: -10px" referrerPolicy='no-referrer'/>
+        </p>
+        <p><img src='charts/libr/podepret.png' alt='podepret' width="350"
+                style="float: left;margin-right:5px; "
+                referrerPolicy='no-referrer'/></p>
+        <p><img src='charts/libr/undepret.png' alt='undepret'
+              width="350" style="float: right;margin-right:-10px;"  referrerPolicy='no-referrer'/></p>
+        <p><span>	</span></p>
+        <p>&nbsp;</p>
+        <hr/>
+        <p ><span>	</span>由上图我们可以分析出，研究生中对图书借阅量贡献前两名都为外语学院和国际政治系，且国政系在人数较少的情况下借阅的书籍量几乎与外院持平，可以看出国政系学生最常在图书馆借阅书籍，其次为外语学院，借阅数量最低的院系研究生和本科生分别为信科学院和法律系。
+        </p>
+        <p>&nbsp;</p>
+        <hr/>
+        <p><span>	</span>接下来，让我们结合院系与借书种类的特点多维度的分析一下他们之间的关系特点。我们将通过对本科生的分析引入对研究生的分析，将研究生分析结果与本科生的分析结果做对比，为特征明显的系别的同学提出专业学习意见。
+        </p>
+        <h2><a name='header-n126' class='md-header-anchor '></a>各系别借还书数量与类别数目对比</h2>
+        <h3><a name='header-n150' class='md-header-anchor '></a>本科生</h3>
+        <p>以下为本科生各系一年内借还书数量与借还书种类数对比图：</p>
+        <p><img src='charts/libr/dunclanum.png' alt='unnumcla'
+              width="720" height="400" referrerPolicy='no-referrer'/>
+        </p>
+        <p>通过分析得知：</p>
+        <ul>
+            <li><p>国经、国政和信科借还书种类多</p>
+                <ul>
+                    <li>国政国经一方面可能由于专业对于综合学科的涉及较广，另一方面表明国经国政的同学综合知识水平可能较其他系高；</li>
+                    <li>信科的同学则因本身为处在文科院校的理科学生，受文科影响较为大，在查阅理工科类书籍的同时，也依旧会对文科类书籍感兴趣。</li>
+                </ul>
+            </li>
+            <li><p>公管和法律系可能由于系别要求不同，同学们比较专于本专业的学习，借还书种类偏少，比较专注与专业书籍的研究。</p></li>
+        </ul>
+        <h3><a name='header-n152' class='md-header-anchor '></a>研究生</h3>
+        <p>以下为研究生各系一年内借还书数量与借还书种类数对比图：</p>
+        <p><img src='charts/libr/dpoclanum.png' alt='poclanum'
+               width="720" height="400"  referrerPolicy='no-referrer'/>
+        </p>
+        <hr/>
+        <p>加上研究生各系一年内借还书数量与借还书种类数对比，结合本科生分析情况可知：</p>
+        <ul>
+            <li>
+                国政、公管和文传系借书种类数多，尤其是国政借书的数量也尤其多。公管系的研究生明显比本科生借书种类更加繁多，说明公管系对于研究生和本科生要求是有着较大不同的，公管专业的同学如果想要在专业素质上有着更高的提升，建议广泛博览群书，提升综合素养从而有助于知识基础的扎实。
+            </li>
+            <li>
+                法律系的研究生借书数量明显比本科生借书数量更多，而借书种类变化不大，这说明法律系的同学们专业涉及面不是特别广，但是对深度要求较高。建议想要学好法律的同学们能在本科阶段扩宽视野，在研究生阶段更多往学术研究深度靠拢。
+            </li>
+            <li>
+                信科系的学生和文科起学生的要求则大不相同，本科生阶段对于基础知识的要求更高，他们要不断学习新的专业知识来提高专业素养，因此会更多地借阅书籍来提升素养；而在研究生阶段，由于信息产业的发展速度极快，书本内容无法跟上时代的新技术的步伐。由于研究生同学们主要对当代时新技术会做更多的研究，因此会主要借助网络等更新较快的资源来满足学习需求，借阅的书籍就会相对减少，这可以说是一种学习方式的改变。因此建议希望在信科专业取得深入发展的同学们，在本科阶段就对如何高效利用网络资源有着较好的把握，从而有助于自己的进一步发展。
+            </li>
+        </ul>
+        <h3><a name='header-n175' class='md-header-anchor '></a>总结与建议</h3>
+        <ul>
+            <li><p>
+                综上所述，国政系的同学们的是借书处的主客，它们不但借阅的图书数量多，而且种类繁杂，涉及面广泛，想必和国政系老师的要求分不开。经了解，国政系同学们研究的课题往往要设计多个学科领域，他们研究的面就更广泛，并且人文学识底蕴会更加深厚。外院的同学们为了学好语言，也会对自己的文学面有着较高的要求，他们会广泛阅读各类图书，不断提升自己的综合素养，造成了事实上学语言的同学们的综合素质也往往比较高。</p>
+            </li>
+            <li><p>建议借书处每每在采购图书的时候能够更多的征求国政和外院同学们的建议，他们应该有能力为学校提供有力可靠的建议。</p>
+                <p>&nbsp;</p></li>
+        </ul>
+        <hr/>
+        <p>那么接下来，我们将综合各系借还书数量和种类进行各系借还书类关联规则挖掘</p>
+        <h2><a name='header-n195' class='md-header-anchor '></a>关联规则挖掘及综合分析</h2>
+        <p>我们通过利用Weka软件根据图书馆借还书种类及人数数据，对每个人借阅的相关书籍分系别进行了关联规则挖掘，得出了如下结论：</p>
+        <ul>
+            <li>国关的学生中信科学院的学生被我校的文科气息感染，借阅计算机类图书时常常借阅文学、政法类书籍</li>
+            <li>国政系、法律系学生钟爱本专业图书，在借阅其他书籍时都会同时借阅政法类书籍</li>
+            <li>外语学院、国际经济系也更喜欢涉及本专业的语言文字、经济类的书籍，除此之外，外院和国经同样有借阅文学类图书的倾向，他们可能比较喜欢通过阅读小说散文等来丰富自己的精神世界</li>
+            <li>文化传播系、公共管理系涉猎广泛，但是都会在借阅其他图书同时借阅本专业书籍</li>
+            <li>
+                此外，国关的研究生偏爱人文社科类的书籍，即使借阅其它专业的书籍也离不开和自己专业有关的其他文科门类，如政法类学生常常借阅地理历史类书籍，借阅哲学书籍的同学倾向于借阅语言文字类书籍，出于国际关系学院专业设置上大部分为文科可以理解。国关的本科生同样偏爱文科书籍，然而和研究生相比，本科生会在文学类书籍上表现出更为浓厚的兴趣，在借阅专业书籍时会顺带借阅一两本小说文学。
+            </li>
+        </ul>
+        <h3><a name='header-n218' class='md-header-anchor '></a>给借书处规划书籍位置的建议</h3>
+        <ul>
+            <li>针对以上数据层面的分析，人文社科类书籍受到国关学生一致青睐，应该将文科类书籍放在相对显眼的区域，鉴于国关同学青睐语言文学类书籍，可以在引进图书时一方面注重学术类专业书籍，另外一方面多多考虑文学类书籍。
+            </li>
+            <li>另外，为了方便同学借阅书籍，优化借书处放置图书结构规划，可以考虑在文科大类下，将语言文学类书放置在政法类和哲学宗教类相邻区域，将历史地理类书籍与政法类书籍放置在相邻区域。</li>
+        </ul>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <hr/>
+        <p>除了以上有关各系借书类别的分析之外，我们还对师生们借书的时间段进行的了细致的分析。</p>
+        <p>我们将依次根据不同月份和一天中的不同时间段对借还书的频次作分析。</p>
+        <p>&nbsp;</p>
+        <h2><a name='header-n245' class='md-header-anchor '></a>各月借还书人数分析</h2>
+        <h3><a name='header-n247' class='md-header-anchor '></a>各月借书人数分析</h3>
+        <p>以下依次是总体、老师、本科生和研究生一年中每个月借书数量条形统计图：</p>
+        <p><img src='charts/libr/monthle.png' alt='mle' width="350"
+                style="float: left;margin-right:5px;" referrerPolicy='no-referrer'/>
+        </p>
+        <!--<p>以下依次是老师、本科生和研究生一年中每个月借书数量条形统计图：</p>-->
+        <p><img src='charts/libr/teamle.png' alt='remle' width="350"
+                style="float: right;margin-right:-10px;"
+                referrerPolicy='no-referrer'/>
+        </p>
+        <p><img src='charts/libr/unmle.png' alt='unmle' width="350"
+                style="float: left;margin-right:5px;" referrerPolicy='no-referrer'/>
+        </p>
+        <p><img src='charts/libr/pomle.png' alt='pomle' width="350"
+                style="float: right;margin-right:-10px;" referrerPolicy='no-referrer'/>
+        </p>
+        <p><span>	</span>根据一年中各个月份借书情况，教职工借书量呈现波动的分布，在12月时达到借书高峰，总体借书量秋季学期要大于春季学期。学生借书量最大月份的分别为9月和3月，这两个月正好对应每个学期开始的一个月，第二个月借书量随着借书热情消退而走低，在学期第三个月开始产生小范围的反弹或波动，由于学生基数大，对于借书总量的贡献远大于教职工，因此总借书量趋势同本研学生借还数量。
+        </p>
+        <p>&nbsp;</p>
+        <h3><a name='header-n262' class='md-header-anchor '></a>各月还书人数分析</h3>
+        <p>以下是一年中每个月还书数量条形统计图：</p>
+        <p><img src='charts/libr/monthret.png' alt='mret'
+                referrerPolicy='no-referrer'/>
+        </p>
+        <p>以下依次是老师、本科生和研究生一年中每个月还书数量统计对比图：</p>
+        <p><img src='charts/libr/temret.png' alt='temre' width="350"
+                style="float: left;margin-right:5px;"
+                referrerPolicy='no-referrer'/>
+        </p>
+        <p><img src='charts/libr/&amp;unpomret.png' alt='&amp;unpomre' width="350"
+                style="float: right;margin-right:-10px;"
+                referrerPolicy='no-referrer'/></p>
+        <p><span>	</span>分析各月还书情况知，老师和研究生倾向于在寒假过后的三月还书，经过分析知这些书大多来自12月和1月的借阅，说明他们倾向于把书借回家，利用寒假的时间丰富自己的业余生活。老师在7月还书数量也很高，推测老师习惯在7月把春季学期借阅的图书进行归还，同时可能也会借阅新的书籍供自己在暑假时研读，于是在9月又达到一个还书高峰。同样的，12月也是老师和同学们的借还书高峰。本科生在每个学期里，越靠后的月份还书的数量越多，一般会把本学期所借图书在期末进行累加归还。
+        </p>
+        <p>&nbsp;</p><h4><a name='header-n278' class='md-header-anchor '></a>建议</h4>
+        <p><span>	</span>总的来说，3、6和12月还书数量较多，同学们更喜欢寒假借阅书籍，而老师们寒假和暑假借书的热情差不多，说明同学们的暑假生活往往比较多姿多彩，不愿局限于书本。而借书高峰主要在3月、9月和12月，其中12月则以老师为主。因此建议学校在临近假期的时候加强借书处的管理，甚至可以按照我们的书籍放置位置建议为老师同学们个性化规划放书位置，以方便师生借阅图书。
+        </p>
+        <p>&nbsp;</p>
+        <h2><a name='header-n283' class='md-header-anchor '></a>一天中各小时借还书人数分析</h2>
+        <p>以下依次是总体、老师、本科生和研究生一天中每小时借书数量条形统计图：</p>
+        <p><img src='charts/libr/hourle.png' alt='hnum' width="350"
+                style="float: left;margin-right:5px;" referrerPolicy='no-referrer'/>
+        </p>
+        <!--<p>以下依次是老师、本科生和研究生一天中每小时借书数量条形统计图：</p>-->
+        <p><img src='charts/libr/teahle.png' alt='tehle' width="350"
+                style="float: right;margin-right:-10px;"
+                referrerPolicy='no-referrer'/>
+        </p>
+        <p><img src='charts/libr/unhle.png' alt='unhle' width="350"
+                style="float: left;margin-right:5px;" referrerPolicy='no-referrer'/>
+        </p>
+        <p><img src='charts/libr/pohle.png' alt='pohle' width="350"
+                style="float: right;margin-right:-10px;" referrerPolicy='no-referrer'/>
+        </p>
+        <p>以下是一天中每小时还书数量条形统计图：</p>
+        <p><img src='charts/libr/hourret.png' alt='hre'
+                referrerPolicy='no-referrer'/>
+        </p>
+        <p>以下依次是老师、本科生和研究生一天中每小时借书数量统计对比图：</p>
+        <p><img src='charts/libr/tehret.png' alt='rehre' width="350"
+                style="float: left;margin-right:5px;"
+                referrerPolicy='no-referrer'/>
+        </p>
+        <p><img src='charts/libr/&amp;unpohret.png' alt='&amp;unpohre'
+                width="350" style="float: right;margin-right:-10px;" referrerPolicy='no-referrer'/></p>
+        <p><span>	</span>分析一天中各个时间段借还书情况，本科生与研究生每天归还图书数目最多的时间为上午9点到10点与下午3点，这些时间去图书馆还书的人数最多。主要原因是因为上午没早课或者是提前下课，同学们准备去自习室自习的时候顺便把书归还。本科生和研究生借还书量在下午3点达到一天的高峰，且下午借还书总人数都大于上午。而反观教职工，借还书量在上午10点左右达到高峰，且上午的图书借还书量高于下午，反映在学生和教职工的借还书时间习惯上有所出入。
+        </p>
+        <ul>
+            <li>建议老师和同学们错峰借还书，错开9、10点和下午3点，并更多的选择上午借还书，这样能在更宽松的环境下借阅书籍。</li>
+        </ul>
+        <div id="footer">
+            <div id="fl">
+                <p>&copy; 李陈依 . 宿汉辰 . 刘嘉青 . 毛羽哲 . 王泽坤 .</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+</html>

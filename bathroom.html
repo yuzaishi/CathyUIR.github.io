@@ -1,0 +1,1312 @@
+<!doctype html>
+<html lang="ch">
+<head>
+    <meta charset='UTF-8'>
+    <title>浴室数据分析</title>
+    <link rel="stylesheet" href="sub.css" type="text/css"/>
+    <link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext'
+          rel='stylesheet' type='text/css'/>
+    <style type='text/css'>html {
+        overflow-x: initial !important;
+    }
+
+    :root {
+        --bg-color: #ffffff;
+        --text-color: #333333;
+        --select-text-bg-color: #B5D6FC;
+        --select-text-font-color: auto;
+        --monospace: "Lucida Console", Consolas, "Courier", monospace;
+    }
+
+    html {
+        font-size: 14px;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+        margin: 0px;
+        padding: 0px;
+        height: auto;
+        bottom: 0px;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        font-size: 1rem;
+        line-height: 1.42857;
+        overflow-x: hidden;
+        background: inherit;
+    }
+
+    iframe {
+        margin: auto;
+    }
+
+    a.url {
+        word-break: break-all;
+    }
+
+    a:active, a:hover {
+        outline: 0px;
+    }
+
+    .in-text-selection, ::selection {
+        text-shadow: none;
+        background: var(--select-text-bg-color);
+        color: var(--select-text-font-color);
+    }
+
+    #write {
+        margin: 0px auto;
+        height: auto;
+        width: inherit;
+        word-break: normal;
+        word-wrap: break-word;
+        position: relative;
+        white-space: normal;
+        overflow-x: visible;
+        padding-top: 40px;
+    }
+
+    #write.first-line-indent p {
+        text-indent: 2em;
+    }
+
+    #write.first-line-indent li p, #write.first-line-indent p * {
+        text-indent: 0px;
+    }
+
+    #write.first-line-indent li {
+        margin-left: 2em;
+    }
+
+    .for-image #write {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    body.typora-export {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .typora-export .footnote-line, .typora-export li, .typora-export p {
+        white-space: pre-wrap;
+    }
+
+    @media screen and (max-width: 500px) {
+        body.typora-export {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        #write {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .CodeMirror-sizer {
+            margin-left: 0px !important;
+        }
+
+        .CodeMirror-gutters {
+            display: none !important;
+        }
+    }
+
+    #write li > figure:first-child {
+        margin-top: -20px;
+    }
+
+    #write ol, #write ul {
+        position: relative;
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: middle;
+    }
+
+    button, input, select, textarea {
+        color: inherit;
+        font-style: inherit;
+        font-variant: inherit;
+        font-weight: inherit;
+        font-stretch: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        font-family: inherit;
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+        line-height: normal;
+        padding: 0px;
+    }
+
+    *, ::after, ::before {
+        box-sizing: border-box;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre {
+        width: inherit;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p {
+        position: relative;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        break-after: avoid-page;
+        break-inside: avoid;
+        orphans: 2;
+    }
+
+    p {
+        orphans: 4;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.6rem;
+    }
+
+    h4 {
+        font-size: 1.4rem;
+    }
+
+    h5 {
+        font-size: 1.2rem;
+    }
+
+    h6 {
+        font-size: 1rem;
+    }
+
+    .md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .md-blockmeta {
+        color: rgb(204, 204, 204);
+        font-weight: 700;
+        font-style: italic;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    sup.md-footnote {
+        padding: 2px 4px;
+        background-color: rgba(238, 238, 238, 0.7);
+        color: rgb(85, 85, 85);
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    sup.md-footnote a, sup.md-footnote a:hover {
+        color: inherit;
+        text-transform: inherit;
+        text-decoration: inherit;
+    }
+
+    #write input[type="checkbox"] {
+        cursor: pointer;
+        width: inherit;
+        height: inherit;
+    }
+
+    figure {
+        overflow-x: auto;
+        margin: 1.2em 0px;
+        max-width: calc(100% + 16px);
+        padding: 0px;
+    }
+
+    figure > table {
+        margin: 0px !important;
+    }
+
+    tr {
+        break-inside: avoid;
+        break-after: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+        width: 100%;
+        overflow: auto;
+        break-inside: auto;
+        text-align: left;
+    }
+
+    table.md-table td {
+        min-width: 32px;
+    }
+
+    .CodeMirror-gutters {
+        border-right: 0px;
+        background-color: inherit;
+    }
+
+    .CodeMirror {
+        text-align: left;
+    }
+
+    .CodeMirror-placeholder {
+        opacity: 0.3;
+    }
+
+    .CodeMirror pre {
+        padding: 0px 4px;
+    }
+
+    .CodeMirror-lines {
+        padding: 0px;
+    }
+
+    div.hr:focus {
+        cursor: none;
+    }
+
+    #write pre {
+        white-space: pre-wrap;
+    }
+
+    #write.fences-no-line-wrapping pre {
+        white-space: pre;
+    }
+
+    #write pre.ty-contain-cm {
+        white-space: normal;
+    }
+
+    .CodeMirror-gutters {
+        margin-right: 4px;
+    }
+
+    .md-fences {
+        font-size: 0.9rem;
+        display: block;
+        break-inside: avoid;
+        text-align: left;
+        overflow: visible;
+        white-space: pre;
+        background: inherit;
+        position: relative !important;
+    }
+
+    .md-diagram-panel {
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+        padding-top: 0px;
+        padding-bottom: 8px;
+        overflow-x: auto;
+    }
+
+    #write .md-fences.mock-cm {
+        white-space: pre-wrap;
+    }
+
+    .md-fences.md-fences-with-lineno {
+        padding-left: 0px;
+    }
+
+    #write.fences-no-line-wrapping .md-fences.mock-cm {
+        white-space: pre;
+        overflow-x: auto;
+    }
+
+    .md-fences.mock-cm.md-fences-with-lineno {
+        padding-left: 8px;
+    }
+
+    .CodeMirror-line, twitterwidget {
+        break-inside: avoid;
+    }
+
+    .footnotes {
+        opacity: 0.8;
+        font-size: 0.9rem;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    .footnotes + .footnotes {
+        margin-top: 0px;
+    }
+
+    .md-reset {
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        outline: 0px;
+        vertical-align: top;
+        background: 0px 0px;
+        text-decoration: none;
+        text-shadow: none;
+        float: none;
+        position: static;
+        width: auto;
+        height: auto;
+        white-space: nowrap;
+        cursor: inherit;
+        -webkit-tap-highlight-color: transparent;
+        line-height: normal;
+        font-weight: 400;
+        text-align: left;
+        box-sizing: content-box;
+        direction: ltr;
+    }
+
+    li div {
+        padding-top: 0px;
+    }
+
+    blockquote {
+        margin: 1rem 0px;
+    }
+
+    li .mathjax-block, li p {
+        margin: 0.5rem 0px;
+    }
+
+    li {
+        margin: 0px;
+        position: relative;
+    }
+
+    blockquote > :last-child {
+        margin-bottom: 0px;
+    }
+
+    blockquote > :first-child, li > :first-child {
+        margin-top: 0px;
+    }
+
+    .footnotes-area {
+        color: rgb(136, 136, 136);
+        margin-top: 0.714rem;
+        padding-bottom: 0.143rem;
+        white-space: normal;
+    }
+
+    #write .footnote-line {
+        white-space: pre-wrap;
+    }
+
+    @media print {
+        body, html {
+            border: 1px solid transparent;
+            height: 99%;
+            break-after: avoid;
+            break-before: avoid;
+        }
+
+        #write {
+            margin-top: 0px;
+            padding-top: 0px;
+            border-color: transparent !important;
+        }
+
+        .typora-export * {
+            -webkit-print-color-adjust: exact;
+        }
+
+        html.blink-to-pdf {
+            font-size: 13px;
+        }
+
+        .typora-export #write {
+            padding-left: 32px;
+            padding-right: 32px;
+            padding-bottom: 0px;
+            break-after: avoid;
+        }
+
+        .typora-export #write::after {
+            height: 0px;
+        }
+
+        @page {
+            margin: 20mm 0px;
+        }
+    }
+
+    .footnote-line {
+        margin-top: 0.714em;
+        font-size: 0.7em;
+    }
+
+    a img, img a {
+        cursor: pointer;
+    }
+
+    pre.md-meta-block {
+        font-size: 0.8rem;
+        min-height: 0.8rem;
+        white-space: pre-wrap;
+        background: rgb(204, 204, 204);
+        display: block;
+        overflow-x: hidden;
+    }
+
+    p > .md-image:only-child:not(.md-img-error) img, p > img:only-child {
+        display: block;
+        margin: auto;
+    }
+
+    p > .md-image:only-child {
+        display: inline-block;
+        width: 100%;
+    }
+
+    #write .MathJax_Display {
+        margin: 0.8em 0px 0px;
+    }
+
+    .md-math-block {
+        width: 100%;
+    }
+
+    .md-math-block:not(:empty)::after {
+        display: none;
+    }
+
+    [contenteditable="true"]:active, [contenteditable="true"]:focus {
+        outline: 0px;
+        box-shadow: none;
+    }
+
+    .md-task-list-item {
+        position: relative;
+        list-style-type: none;
+    }
+
+    .task-list-item.md-task-list-item {
+        padding-left: 0px;
+    }
+
+    .md-task-list-item > input {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        margin-left: -1.2em;
+        margin-top: calc(1em - 10px);
+    }
+
+    .math {
+        font-size: 1rem;
+    }
+
+    .md-toc {
+        min-height: 3.58rem;
+        position: relative;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+    .md-toc-content {
+        position: relative;
+        margin-left: 0px;
+    }
+
+    .md-toc-content::after, .md-toc::after {
+        display: none;
+    }
+
+    .md-toc-item {
+        display: block;
+        color: rgb(65, 131, 196);
+    }
+
+    .md-toc-item a {
+        text-decoration: none;
+    }
+
+    .md-toc-inner:hover {
+        text-decoration: underline;
+    }
+
+    .md-toc-inner {
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .md-toc-h1 .md-toc-inner {
+        margin-left: 0px;
+        font-weight: 700;
+    }
+
+    .md-toc-h2 .md-toc-inner {
+        margin-left: 2em;
+    }
+
+    .md-toc-h3 .md-toc-inner {
+        margin-left: 4em;
+    }
+
+    .md-toc-h4 .md-toc-inner {
+        margin-left: 6em;
+    }
+
+    .md-toc-h5 .md-toc-inner {
+        margin-left: 8em;
+    }
+
+    .md-toc-h6 .md-toc-inner {
+        margin-left: 10em;
+    }
+
+    @media screen and (max-width: 48em) {
+        .md-toc-h3 .md-toc-inner {
+            margin-left: 3.5em;
+        }
+
+        .md-toc-h4 .md-toc-inner {
+            margin-left: 5em;
+        }
+
+        .md-toc-h5 .md-toc-inner {
+            margin-left: 6.5em;
+        }
+
+        .md-toc-h6 .md-toc-inner {
+            margin-left: 8em;
+        }
+    }
+
+    a.md-toc-inner {
+        font-size: inherit;
+        font-style: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+    }
+
+    .footnote-line a:not(.reversefootnote) {
+        color: inherit;
+    }
+
+    .md-attr {
+        display: none;
+    }
+
+    .md-fn-count::after {
+        content: ".";
+    }
+
+    code, pre, samp, tt {
+        font-family: var(--monospace);
+    }
+
+    kbd {
+        margin: 0px 0.1em;
+        padding: 0.1em 0.6em;
+        font-size: 0.8em;
+        color: rgb(36, 39, 41);
+        background: rgb(255, 255, 255);
+        border: 1px solid rgb(173, 179, 185);
+        border-radius: 3px;
+        box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    .md-comment {
+        color: rgb(162, 127, 3);
+        opacity: 0.8;
+        font-family: var(--monospace);
+    }
+
+    code {
+        text-align: left;
+        vertical-align: initial;
+    }
+
+    a.md-print-anchor {
+        white-space: pre !important;
+        border-width: initial !important;
+        border-style: none !important;
+        border-color: initial !important;
+        display: inline-block !important;
+        position: absolute !important;
+        width: 1px !important;
+        right: 0px !important;
+        outline: 0px !important;
+        background: 0px 0px !important;
+        text-decoration: initial !important;
+        text-shadow: initial !important;
+    }
+
+    .md-inline-math .MathJax_SVG .noError {
+        display: none !important;
+    }
+
+    .html-for-mac .inline-math-svg .MathJax_SVG {
+        vertical-align: 0.2px;
+    }
+
+    .md-math-block .MathJax_SVG_Display {
+        text-align: center;
+        margin: 0px;
+        position: relative;
+        text-indent: 0px;
+        max-width: none;
+        max-height: none;
+        min-height: 0px;
+        min-width: 100%;
+        width: auto;
+        overflow-y: hidden;
+        display: block !important;
+    }
+
+    .MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display {
+        width: auto;
+        margin: inherit;
+        display: inline-block !important;
+    }
+
+    .MathJax_SVG .MJX-monospace {
+        font-family: var(--monospace);
+    }
+
+    .MathJax_SVG .MJX-sans-serif {
+        font-family: sans-serif;
+    }
+
+    .MathJax_SVG {
+        display: inline;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        zoom: 90%;
+        text-indent: 0px;
+        text-align: left;
+        text-transform: none;
+        letter-spacing: normal;
+        word-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        float: none;
+        direction: ltr;
+        max-width: none;
+        max-height: none;
+        min-width: 0px;
+        min-height: 0px;
+        border: 0px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .MathJax_SVG * {
+        transition: none;
+    }
+
+    .MathJax_SVG_Display svg {
+        vertical-align: middle !important;
+        margin-bottom: 0px !important;
+    }
+
+    .os-windows.monocolor-emoji .md-emoji {
+        font-family: "Segoe UI Symbol", sans-serif;
+    }
+
+    .md-diagram-panel > svg {
+        max-width: 100%;
+    }
+
+    [lang="mermaid"] svg, [lang="flow"] svg {
+        max-width: 100%;
+    }
+
+    [lang="mermaid"] .node text {
+        font-size: 1rem;
+    }
+
+    table tr th {
+        border-bottom: 0px;
+    }
+
+    video {
+        max-width: 100%;
+        display: block;
+        margin: 0px auto;
+    }
+
+    iframe {
+        max-width: 100%;
+        width: 100%;
+        border: none;
+    }
+
+    .highlight td, .highlight tr {
+        border: 0px;
+    }
+
+
+    :root {
+        --side-bar-bg-color: #fafafa;
+        --control-text-color: #777;
+    }
+
+    html {
+        font-size: 16px;
+    }
+
+    body {
+        font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: rgb(51, 51, 51);
+        line-height: 1.6;
+    }
+
+    #write {
+        max-width: 860px;
+        margin: 0px auto;
+        padding: 0px 20px 50px;
+    }
+
+    #write > ul:first-child, #write > ol:first-child {
+        margin-top: 30px;
+    }
+
+    a {
+        color: rgb(65, 131, 196);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        position: relative;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+        line-height: 1.4;
+        cursor: text;
+    }
+
+    h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+        text-decoration: none;
+    }
+
+    h1 tt, h1 code {
+        font-size: inherit;
+    }
+
+    h2 tt, h2 code {
+        font-size: inherit;
+    }
+
+    h3 tt, h3 code {
+        font-size: inherit;
+    }
+
+    h4 tt, h4 code {
+        font-size: inherit;
+    }
+
+    h5 tt, h5 code {
+        font-size: inherit;
+    }
+
+    h6 tt, h6 code {
+        font-size: inherit;
+    }
+
+    h1 {
+        padding-bottom: 0.1em;
+        font-size: 2.25em;
+        line-height: 1.2;
+        border-bottom: 1px solid rgb(238, 238, 238);
+    }
+
+    h2 {
+        padding-bottom: 0.3em;
+        font-size: 1.75em;
+        line-height: 1.225;
+        border-bottom: 1px solid rgb(238, 238, 238);
+    }
+
+    h3 {
+        font-size: 1.5em;
+        line-height: 1.43;
+    }
+
+    h4 {
+        font-size: 1.25em;
+    }
+
+    h5 {
+        font-size: 1em;
+    }
+
+    h6 {
+        font-size: 1em;
+        color: rgb(119, 119, 119);
+    }
+
+    p, blockquote, ul, ol, dl, table {
+        margin: 0.8em 0px;
+    }
+
+    li > ol, li > ul {
+        margin: 0px;
+    }
+
+    hr {
+        height: 2px;
+        padding: 0px;
+        margin: 16px 0px;
+        background-color: rgb(231, 231, 231);
+        border: 0px none;
+        overflow: hidden;
+        box-sizing: content-box;
+    }
+
+    li p.first {
+        display: inline-block;
+    }
+
+    ul, ol {
+        padding-left: 30px;
+    }
+
+    ul:first-child, ol:first-child {
+        margin-top: 0px;
+    }
+
+    ul:last-child, ol:last-child {
+        margin-bottom: 0px;
+    }
+
+    blockquote {
+        border-left: 4px solid rgb(223, 226, 229);
+        padding: 0px 15px;
+        color: rgb(119, 119, 119);
+    }
+
+    blockquote blockquote {
+        padding-right: 0px;
+    }
+
+    table {
+        padding: 0px;
+        word-break: initial;
+    }
+
+    table tr {
+        border-top: 1px solid rgb(223, 226, 229);
+        margin: 0px;
+        padding: 0px;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: rgb(248, 248, 248);
+    }
+
+    table tr th {
+        font-weight: bold;
+        border-width: 1px 1px 0px;
+        border-top-style: solid;
+        border-right-style: solid;
+        border-left-style: solid;
+        border-top-color: rgb(223, 226, 229);
+        border-right-color: rgb(223, 226, 229);
+        border-left-color: rgb(223, 226, 229);
+        border-image: initial;
+        border-bottom-style: initial;
+        border-bottom-color: initial;
+        text-align: left;
+        margin: 0px;
+        padding: 6px 13px;
+    }
+
+    table tr td {
+        border: 1px solid rgb(223, 226, 229);
+        text-align: left;
+        margin: 0px;
+        padding: 6px 13px;
+    }
+
+    table tr th:first-child, table tr td:first-child {
+        margin-top: 0px;
+    }
+
+    table tr th:last-child, table tr td:last-child {
+        margin-bottom: 0px;
+    }
+
+    .CodeMirror-lines {
+        padding-left: 4px;
+    }
+
+    .code-tooltip {
+        box-shadow: rgba(0, 28, 36, 0.3) 0px 1px 1px 0px;
+        border-top: 1px solid rgb(238, 242, 242);
+    }
+
+    .md-fences, code, tt {
+        border: 1px solid rgb(231, 234, 237);
+        background-color: rgb(248, 248, 248);
+        border-radius: 3px;
+        padding: 2px 4px 0px;
+        font-size: 0.9em;
+    }
+
+    code {
+        background-color: rgb(243, 244, 244);
+        padding: 0px 2px;
+    }
+
+    .md-fences {
+        margin-bottom: 15px;
+        margin-top: 15px;
+        padding-top: 8px;
+        padding-bottom: 6px;
+    }
+
+    .md-task-list-item > input {
+        margin-left: -1.3em;
+    }
+
+    @media print {
+        html {
+            font-size: 13px;
+        }
+
+        table, pre {
+            break-inside: avoid;
+        }
+
+        pre {
+            word-wrap: break-word;
+        }
+    }
+
+    .md-fences {
+        background-color: rgb(248, 248, 248);
+    }
+
+    #write pre.md-meta-block {
+        padding: 1rem;
+        font-size: 85%;
+        line-height: 1.45;
+        background-color: rgb(247, 247, 247);
+        border: 0px;
+        border-radius: 3px;
+        color: rgb(119, 119, 119);
+        margin-top: 0px !important;
+    }
+
+    .mathjax-block > .code-tooltip {
+        bottom: 0.375rem;
+    }
+
+    .md-mathjax-midline {
+        background: rgb(250, 250, 250);
+    }
+
+    #write > h3.md-focus::before {
+        left: -1.5625rem;
+        top: 0.375rem;
+    }
+
+    #write > h4.md-focus::before {
+        left: -1.5625rem;
+        top: 0.285714rem;
+    }
+
+    #write > h5.md-focus::before {
+        left: -1.5625rem;
+        top: 0.285714rem;
+    }
+
+    #write > h6.md-focus::before {
+        left: -1.5625rem;
+        top: 0.285714rem;
+    }
+
+    .md-image > .md-meta {
+        border-radius: 3px;
+        padding: 2px 0px 0px 4px;
+        font-size: 0.9em;
+        color: inherit;
+    }
+
+    .md-tag {
+        color: rgb(167, 167, 167);
+        opacity: 1;
+    }
+
+    .md-toc {
+        margin-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .sidebar-tabs {
+        border-bottom: none;
+    }
+
+    #typora-quick-open {
+        border: 1px solid rgb(221, 221, 221);
+        background-color: rgb(248, 248, 248);
+    }
+
+    #typora-quick-open-item {
+        background-color: rgb(250, 250, 250);
+        border-color: rgb(254, 254, 254) rgb(229, 229, 229) rgb(229, 229, 229) rgb(238, 238, 238);
+        border-style: solid;
+        border-width: 1px;
+    }
+
+    .on-focus-mode blockquote {
+        border-left-color: rgba(85, 85, 85, 0.12);
+    }
+
+    header, .context-menu, .megamenu-content, footer {
+        font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    .file-node-content:hover .file-node-icon, .file-node-content:hover .file-node-open-state {
+        visibility: visible;
+    }
+
+    .mac-seamless-mode #typora-sidebar {
+        background-color: var(--side-bar-bg-color);
+    }
+
+    .md-lang {
+        color: rgb(180, 101, 77);
+    }
+
+    .html-for-mac .context-menu {
+        --item-hover-bg-color: #E6F0FE;
+    }
+
+    #md-notification .btn {
+        border: 0px;
+    }
+
+    .dropdown-menu .divider {
+        border-color: rgb(229, 229, 229);
+    }
+
+
+    .typora-export li, .typora-export p, .typora-export, .footnote-line {
+        white-space: normal;
+    }
+    </style>
+</head>
+<body class='typora-export'>
+<div id="content">
+    <div id="logo">
+        <p style="left: 162px; top: 9px; padding:0 2px 2px;font-size: 14px;">基于校园一卡通数据的用户画像分析展示</p>
+        <h1 class="school"><strong>国际关系学院</strong></h1>
+        <h1>校园一卡通数据用户画像分析</h1>
+    </div>
+    <div class="uir"><img src="images/UIR0.png" alt="校徽" height=60px/></div>
+    <ul id="menu">
+        <li><a href="index.html">介绍</a></li>
+        <li><a href="libr.html">图书馆</a></li>
+        <li><a href="canteen.html">食堂</a></li>
+        <li><a class="current" href="bathroom.html">浴室</a></li>
+        <li><a href="end.html">总结</a></li>
+    </ul>
+    <div class="clear">
+        <!--<p>&nbsp;</p>-->
+        <p><br/>
+        </p>
+    </div>
+
+    <div id="left" style="width: 220px;">
+        <div class="caption" ><p>索引</p></div>
+        <div class="box">
+            <ul>
+                <li><a href="#header-n11">淋浴时间特点分析</a></li>
+                <li><a href="#header-n12">一天中各时间段洗澡<br>人数分析</a></li>
+                <li><a href="#header-n34">一周内不同日期洗澡<br>人数分析</a></li>
+                <li><a href="#header-n50">一年中不同月份洗澡<br>人数分析</a></li>
+                <li><a href="#header-n73">学生单次淋浴消费分析</a></li>
+                <li><a href="#header-n137">浴室不同喷头的<br>使用情况分析</a></li>
+                <li><a href="#header-n140">女生浴室</a></li>
+                <li><a href="#header-n172">男生浴室</a></li>
+                <li><a href="bathroom.html">回顶部</a></li>
+            </ul>
+        </div>
+    </div>
+<div id='write' class='is-node' style="border-right: 1px solid #B5D6FC;"><h1><a name='header-n2' class='md-header-anchor '></a>浴室数据分析</h1>
+    <p>我们对于浴室数据的分析，主要通过三个方面进行阐述：</p>
+    <ol start=''>
+        <li>我们首先从时间维度入手，对不同单位时间内洗澡人数变化进行分析，从多角度得出学生的洗澡特点，为同学们淋浴时间提供具参考价值的建议，也为校方选择浴室锅炉大型检修时间提供建议；</li>
+        <li>我们将研究同学们单次洗澡的消费金额与插卡次数特点，为同学们养成良好的节约习惯提供建议；</li>
+        <li>我们还通过对不同位置的喷头受欢迎程度的分析，得出同学们的集体用户画像，并为同学选择淋浴位置及学校进行浴室设施单个检修或更换提出科学的建议。</li>
+    </ol>
+    <p>&nbsp;</p>
+    <h2><a name='header-n11' class='md-header-anchor '></a>淋浴时间特点分析</h2>
+    <h3><a name='header-n12' class='md-header-anchor '></a>一天中各时间段洗澡人数分析</h3>
+    <p>下图为一天中各小时洗澡频次折线图：</p>
+    <p><img src='charts/bathroom/bath1.png' alt='bathday' referrerPolicy='no-referrer'/></p>
+    <p>&nbsp;</p>
+    <p>由上图我们可以得知：</p>
+    <p><span>	</span>男浴室和女浴室的洗澡高峰期普遍都集中在八点，经调查得知大多数同学比较偏爱睡前洗澡，而这是能够洗完澡的最晚时间段，因此大家都不自觉地会在八点以后扎堆洗澡。</p>
+    <ul>
+        <li><p>男浴室</p>
+            <p><span>	</span>单独来看，男浴室的洗澡人数随着时间的流逝不断上升，八点的洗澡人数可达到五点的两倍不止，经调查得知男同学们都偏爱在7-8点左右结束运动，随后去舒舒服服地洗澡休息。</p>
+            <ul>
+                <li><p>建议：</p>
+                    <p>没有课程安排的男同学可以尽量错峰洗澡，即在8点之前，以缓解浴室高峰时的拥挤。</p></li>
+            </ul>
+        </li>
+        <li><p>女浴室</p>
+            <p><span>	</span>女浴室的趋势则呈现了一个很有趣的现象，在5点达到了一个小高峰，而6点时又骤降，随后又呈逐步上升趋势，同样在8点之后达到了最高峰。原因是6点常常会存在同学们晚课以及各体育艺术社团训练的情况，致使同学们在6点多没有时间去浴室洗澡。
+            </p>
+            <ul>
+                <li><p>建议：</p>
+                    <p>没有课程和其他活动安排的女同学可以选择6点时洗澡。</p></li>
+            </ul>
+        </li>
+    </ul>
+    <p><strong>给学校的建议</strong></p>
+    <ul>
+        <li>
+            经过分析得知，8点到9点时间段的洗澡人数最高，同学们也有许多是在浴室关闭前不久才去洗的澡，经调查得知，同学们都希望学校的浴室开放时间得以延长。因此我们建议后勤中心将浴室开放时间延至9:30，以满足多数同学们的需求。
+        </li>
+    </ul>
+    <p>&nbsp;</p>
+    <h3><a name='header-n34' class='md-header-anchor '></a>一周内不同日期洗澡人数分析</h3>
+    <p>下图为连续一月的不同日期同学们的淋浴频次趋势折线图：</p>
+    <p><img src='charts/bathroom/bath2.png' alt='bathdate' referrerPolicy='no-referrer'/></p>
+    <hr/>
+    <p>由上图我们可以看出：</p>
+    <ul>
+        <li>
+            以星期为周期的数据显示，工作日的五天中洗澡的频次似乎没有呈现出一定的规律性。但就周末而言，不论男女，周日的洗澡频次总是会达到一个小高峰，伴随着周六与周一的小低谷。看起来同学们都喜欢在周日的晚上洗澡，这似乎是一种仪式，洗去一周的疲惫与不堪，以一个全新的自己面对新一周的工作与生活。
+        </li>
+        <li>周六洗澡人数的低谷，也许与两年前学校浴室周六并不开放而导致的周六不洗澡的习惯有关，但无论如何，学校将周六不开放浴室这个不太人性化的规定取缔，对同学们都是一个大大的福利。</li>
+    </ul>
+    <p><strong>建议：</strong></p>
+    <p><span>	</span>大三大四或研究生的师哥师姐们周六不爱去浴室洗澡的习惯可能已经改不掉了，希望大一大二的师弟师妹们以及新入学的研一师哥师姐，可以把周末洗澡的这个仪式酌情的错峰挪到周六，避免周日挤在一起导致没有办法完整的执行。
+    </p>
+    <p>&nbsp;</p>
+    <h3><a name='header-n50' class='md-header-anchor '></a>一年当中不同月份洗澡人数分析</h3>
+    <p>以下是我们所搜集到的所有数据中男女浴室各月洗澡频次折线图：</p>
+    <p><img src='charts/bathroom/bath3.png' alt='bath3'
+           height="400" referrerPolicy='no-referrer'/></p>
+    <p>&nbsp;</p>
+    <p>由上图我们可以看出：</p>
+    <p><span>	</span>洗澡人数高峰的月份为12月，低谷期为5月（排除1/2/7/8月时假期同学们回家以及澡堂开放时间减少的影响）。</p>
+    <p><span>	</span>这似乎是一个不那么合理的结论，毕竟一般来说，人们在夏天的洗澡频次都要较冬天多得多。我们分析，这种反常的结果是夏天温度高时宿舍楼内的太阳能淋浴间为澡堂分忧而导致的。同时，这也说明，冬天时较低频率的洗澡需求，仍然不能够平衡宿舍楼中的淋浴间在同学们洗澡选择中所占的重要地位。寒冷的冬天澡堂锅炉的负荷远要比夏天多得多。
+    </p>
+    <p><strong>建议</strong></p>
+    <ul>
+        <li>学校的有关部门在冬天尤其要加强锅炉的保护及维修工作，以保障其高负荷的运作。</li>
+        <li>鉴于北京的冬天太阳依旧晴朗，希望尽量推迟宿舍楼淋浴间太阳能水管的关闭时间，一来为同学们洗澡创造方便，能够多一份选择，二来缓解浴室的锅炉供热压力，还能更加环保节能。</li>
+    </ul>
+    <p>&nbsp;</p>
+    <h2><a name='header-n73' class='md-header-anchor '></a>学生单次淋浴消费分析</h2>
+    <p>下图为平均同学们人均每天洗澡的插卡次数及每次插卡的消费金额分布：</p>
+    <p><img src='charts/bathroom/平均每次澡插卡次数.png' alt='bath4'
+           width="350" style="float: left;margin-right:5px;" referrerPolicy='no-referrer'/></p>
+    <p><img src='charts/bathroom/平均每次消费金额分布.png' alt='bathmon' width="350"
+                style="float: right;margin-right: -10px"
+            referrerPolicy='no-referrer'/></p>
+    <p>&nbsp;</p>
+    <p>由上图我们发现：</p>
+    <ul>
+        <li>插卡次数：大部分用户插卡次数都集中在2~3次，有小部分同学整个过程中只进行了一次插卡。</li>
+        <li>单次插卡花销：单次插卡的大部分情况下，消费金额约0.3~0.9元，经统计，每个同学单次的洗澡消费约在1.5～2.7元之间，也就是人均洗澡过程中放水淋浴时间约在5~9分钟。</li>
+    </ul>
+    <p>但是由于不同类型的同学相互间影响过大，本数据并不能十分切合的反映出同学们的平均淋浴情况。但是通过以上比较，我们可以根据同学们的淋浴特点对同学们做一个分类：</p>
+    <ul>
+        <li><p>“舒适型”同学：洗澡时间长且不间断。</p>
+            <ul>
+                <li><p>形成原因：</p>
+                    <ul>
+                        <li>他们偏向于追求洗澡的舒适性，喜欢洗澡过程中一直淋浴来追求舒适感；</li>
+                        <li>经调查得知有的同学曾有过因洗澡过程中拔卡导致卡掉入沟槽的悲惨经历，因此决定减少甚至戒掉洗澡过程中取卡的习惯。</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><p>“节约型”同学：在不需要冲水时把卡拔出以节约用水，淋浴时间短且间断。</p>
+            <ul>
+                <li><p>形成原因：</p>
+                    <ul>
+                        <li>将调查得知，多数同学认为学校浴室的水费价格偏高，因此他们不得不通过频繁拔卡的方式来减少洗澡开销，但引发的结果是校园卡掉入沟槽事故发生更频繁，有的同学对在浴室洗澡的满意度降低。</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <p><strong>建议</strong></p>
+    <ul>
+        <li>希望学校对于插拔卡的安全问题予以重视，比如设计更易拆拔的沟槽隔板、设计放卡更保险的校园卡计时收费机或是每天都安排专门人员对于浴室沟槽坠物问题进行挽救等；</li>
+        <li>
+            如果可以，希望学校可以考虑对于浴室水费的收费标准加以改进，比如为了鼓励同学们节约用水，实行分阶段的计费标准，对单次插卡超过5分钟的校园卡增加收费力度，而对小于5分钟的校园卡则降低收费标准等。如此一来，相信会有更多同学愿意为节约用水贡献自己的一份力量，减少浴室浪费水资源的行为；
+        </li>
+        <li>我们在统计分析过程中发现有同学忘记拔卡，会导致水一直放的不良现象发生，如此建议学校对于单次插卡累计时间超过20分钟的校园卡消费计时机予以暂停本次插卡消费。这样一来，浪费水资源的现象会大大减少。</li>
+    </ul>
+    <p>&nbsp;</p>
+    <h2><a name='header-n137' class='md-header-anchor '></a>浴室不同喷头的使用情况分析</h2>
+    <h3><a name='header-n140' class='md-header-anchor '></a>女生浴室</h3>
+    <p>下图为女生浴室不同喷头一年内累计消费次数条形统计图：</p>
+    <p><img src='charts/bathroom/bath4.png' alt='gbath'
+            referrerPolicy='no-referrer'/></p>
+    <p>同时我们也对女生浴室各喷头实际位置作了实地调查：</p>
+    <p><img src='charts/bathroom/bath5.png' alt='gbathl'
+            referrerPolicy='no-referrer'/></p>
+    <p>&nbsp;</p>
+    <p>从上面的信息，我们可以看出：</p>
+    <ul>
+        <li>女浴室的热门喷头集中在进门左手边，空间较为狭小的地方，以及靠里却又不是最远的一排位置上。位置的私密性和路程是影响结果最为重要的两大因素。</li>
+        <li>两个爆冷的喷头，许是因为位置太过于靠边，但凡途中有遇到合适的位置都不会再往里头走，反而是比较冷门的那几喷头，位置不算太偏僻，所以我们推测，这几个喷头可能年久失修，不经用了。</li>
+    </ul>
+    <h3><a name='header-n172' class='md-header-anchor '></a>男生浴室</h3>
+    <p>下图为男生浴室不同喷头一年内累计消费次数条形统计图：</p>
+    <p><img src='charts/bathroom/bath6.png' alt='bbath'
+            referrerPolicy='no-referrer'/></p>
+    <p>同时我们也对男生浴室各喷头实际位置作了实地调查：</p>
+    <p><img src='charts/bathroom/bath7.png' alt='bbathl'
+            referrerPolicy='no-referrer'/></p>
+    <p>&nbsp;</p>
+    <p>结合上图我们可以看出：</p>
+    <ul>
+        <li>男同学们对浴室不同位置喷头的偏爱程度似乎分布较为平均，与位置和私密性都并无太多的直接关联。</li>
+        <li>男生浴室第24号喷头的淋浴频次尤其高，远超排名第二的喷头。我们推测，可能是因为这个喷头不但出水充裕，隐私性比较好，鉴于他周围的喷头效果可能都不太理想，周围淋浴的人少，所以这个喷头更加受欢迎。</li>
+        <li>男生浴室还有一个爆冷的喷头，年消费频次不超过100，极大可能是因为年久失修造成的。</li>
+        <li>男生浴室冷门的位置都靠近过道或窗户，附近空气流动大，温度低，导致使用次数少；同时这些位置的损坏可能性较大。</li>
+    </ul>
+    <p><strong>给后勤服务部门的建议</strong></p>
+    <ul>
+        <li>
+            洗澡人次较少的几个喷头，可能都存在设施损坏或者故障等问题，建议及时排查维修。他们一般都分布在靠窗的位置。此外，据了解，对于上图中浴室年消费频次低于1800的喷头同学们的评价都不太好，出水不充足或是喷头漏水等，希望后勤部门能多多加强浴室的维护，使大家更充分利用澡堂空间，避免拥挤。
+        </li>
+        <li>由靠近窗户的位置喷头使用人次少可知，学校浴室的保暖工作可以更加有效，有些同学反映浴室周围的窗户容易漏风，在窗户周围洗澡会比较寒冷。为了保证同学们的身体健康，以及浴室喷头资源的充分利用，建议加强浴室保暖工作的进行。
+        </li>
+    </ul>
+    <div id="footer">
+            <div id="fl">
+                <p>&copy; 李陈依 . 宿汉辰 . 刘嘉青 . 毛羽哲 . 王泽坤 .</p>
+            </div>
+        </div>
+</div>
+</div>
+</body>
+</html>

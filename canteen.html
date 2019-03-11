@@ -1,0 +1,1315 @@
+<!doctype html>
+<html lang="ch">
+<head>
+    <meta charset='UTF-8'>
+    <title>食堂数据分析</title>
+    <link rel="stylesheet" href="sub.css" type="text/css"/>
+    <link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext'
+          rel='stylesheet' type='text/css'/>
+    <style type='text/css'>html {
+        overflow-x: initial !important;
+    }
+
+    :root {
+        --bg-color: #ffffff;
+        --text-color: #333333;
+        --select-text-bg-color: #B5D6FC;
+        --select-text-font-color: auto;
+        --monospace: "Lucida Console", Consolas, "Courier", monospace;
+    }
+
+    html {
+        font-size: 14px;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+        margin: 0px;
+        padding: 0px;
+        height: auto;
+        bottom: 0px;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        font-size: 1rem;
+        line-height: 1.42857;
+        overflow-x: hidden;
+        background: inherit;
+    }
+
+    iframe {
+        margin: auto;
+    }
+
+    a.url {
+        word-break: break-all;
+    }
+
+    a:active, a:hover {
+        outline: 0px;
+    }
+
+    .in-text-selection, ::selection {
+        text-shadow: none;
+        background: var(--select-text-bg-color);
+        color: var(--select-text-font-color);
+    }
+
+    #write {
+        margin: 0px auto;
+        height: auto;
+        width: inherit;
+        word-break: normal;
+        word-wrap: break-word;
+        position: relative;
+        white-space: normal;
+        overflow-x: visible;
+        padding-top: 40px;
+    }
+
+    #write.first-line-indent p {
+        text-indent: 2em;
+    }
+
+    #write.first-line-indent li p, #write.first-line-indent p * {
+        text-indent: 0px;
+    }
+
+    #write.first-line-indent li {
+        margin-left: 2em;
+    }
+
+    .for-image #write {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    body.typora-export {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .typora-export .footnote-line, .typora-export li, .typora-export p {
+        white-space: pre-wrap;
+    }
+
+    @media screen and (max-width: 500px) {
+        body.typora-export {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        #write {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .CodeMirror-sizer {
+            margin-left: 0px !important;
+        }
+
+        .CodeMirror-gutters {
+            display: none !important;
+        }
+    }
+
+    #write li > figure:first-child {
+        margin-top: -20px;
+    }
+
+    #write ol, #write ul {
+        position: relative;
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: middle;
+    }
+
+    button, input, select, textarea {
+        color: inherit;
+        font-style: inherit;
+        font-variant: inherit;
+        font-weight: inherit;
+        font-stretch: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        font-family: inherit;
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+        line-height: normal;
+        padding: 0px;
+    }
+
+    *, ::after, ::before {
+        box-sizing: border-box;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre {
+        width: inherit;
+    }
+
+    #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p {
+        position: relative;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        break-after: avoid-page;
+        break-inside: avoid;
+        orphans: 2;
+    }
+
+    p {
+        orphans: 4;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.6rem;
+    }
+
+    h4 {
+        font-size: 1.4rem;
+    }
+
+    h5 {
+        font-size: 1.2rem;
+    }
+
+    h6 {
+        font-size: 1rem;
+    }
+
+    .md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .md-blockmeta {
+        color: rgb(204, 204, 204);
+        font-weight: 700;
+        font-style: italic;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    sup.md-footnote {
+        padding: 2px 4px;
+        background-color: rgba(238, 238, 238, 0.7);
+        color: rgb(85, 85, 85);
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    sup.md-footnote a, sup.md-footnote a:hover {
+        color: inherit;
+        text-transform: inherit;
+        text-decoration: inherit;
+    }
+
+    #write input[type="checkbox"] {
+        cursor: pointer;
+        width: inherit;
+        height: inherit;
+    }
+
+    figure {
+        overflow-x: auto;
+        margin: 1.2em 0px;
+        max-width: calc(100% + 16px);
+        padding: 0px;
+    }
+
+    figure > table {
+        margin: 0px !important;
+    }
+
+    tr {
+        break-inside: avoid;
+        break-after: auto;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+        width: 100%;
+        overflow: auto;
+        break-inside: auto;
+        text-align: left;
+    }
+
+    table.md-table td {
+        min-width: 32px;
+    }
+
+    .CodeMirror-gutters {
+        border-right: 0px;
+        background-color: inherit;
+    }
+
+    .CodeMirror {
+        text-align: left;
+    }
+
+    .CodeMirror-placeholder {
+        opacity: 0.3;
+    }
+
+    .CodeMirror pre {
+        padding: 0px 4px;
+    }
+
+    .CodeMirror-lines {
+        padding: 0px;
+    }
+
+    div.hr:focus {
+        cursor: none;
+    }
+
+    #write pre {
+        white-space: pre-wrap;
+    }
+
+    #write.fences-no-line-wrapping pre {
+        white-space: pre;
+    }
+
+    #write pre.ty-contain-cm {
+        white-space: normal;
+    }
+
+    .CodeMirror-gutters {
+        margin-right: 4px;
+    }
+
+    .md-fences {
+        font-size: 0.9rem;
+        display: block;
+        break-inside: avoid;
+        text-align: left;
+        overflow: visible;
+        white-space: pre;
+        background: inherit;
+        position: relative !important;
+    }
+
+    .md-diagram-panel {
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+        padding-top: 0px;
+        padding-bottom: 8px;
+        overflow-x: auto;
+    }
+
+    #write .md-fences.mock-cm {
+        white-space: pre-wrap;
+    }
+
+    .md-fences.md-fences-with-lineno {
+        padding-left: 0px;
+    }
+
+    #write.fences-no-line-wrapping .md-fences.mock-cm {
+        white-space: pre;
+        overflow-x: auto;
+    }
+
+    .md-fences.mock-cm.md-fences-with-lineno {
+        padding-left: 8px;
+    }
+
+    .CodeMirror-line, twitterwidget {
+        break-inside: avoid;
+    }
+
+    .footnotes {
+        opacity: 0.8;
+        font-size: 0.9rem;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    .footnotes + .footnotes {
+        margin-top: 0px;
+    }
+
+    .md-reset {
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        outline: 0px;
+        vertical-align: top;
+        background: 0px 0px;
+        text-decoration: none;
+        text-shadow: none;
+        float: none;
+        position: static;
+        width: auto;
+        height: auto;
+        white-space: nowrap;
+        cursor: inherit;
+        -webkit-tap-highlight-color: transparent;
+        line-height: normal;
+        font-weight: 400;
+        text-align: left;
+        box-sizing: content-box;
+        direction: ltr;
+    }
+
+    li div {
+        padding-top: 0px;
+    }
+
+    blockquote {
+        margin: 1rem 0px;
+    }
+
+    li .mathjax-block, li p {
+        margin: 0.5rem 0px;
+    }
+
+    li {
+        margin: 0px;
+        position: relative;
+    }
+
+    blockquote > :last-child {
+        margin-bottom: 0px;
+    }
+
+    blockquote > :first-child, li > :first-child {
+        margin-top: 0px;
+    }
+
+    .footnotes-area {
+        color: rgb(136, 136, 136);
+        margin-top: 0.714rem;
+        padding-bottom: 0.143rem;
+        white-space: normal;
+    }
+
+    #write .footnote-line {
+        white-space: pre-wrap;
+    }
+
+    @media print {
+        body, html {
+            border: 1px solid transparent;
+            height: 99%;
+            break-after: avoid;
+            break-before: avoid;
+        }
+
+        #write {
+            margin-top: 0px;
+            padding-top: 0px;
+            border-color: transparent !important;
+        }
+
+        .typora-export * {
+            -webkit-print-color-adjust: exact;
+        }
+
+        html.blink-to-pdf {
+            font-size: 13px;
+        }
+
+        .typora-export #write {
+            padding-left: 32px;
+            padding-right: 32px;
+            padding-bottom: 0px;
+            break-after: avoid;
+        }
+
+        .typora-export #write::after {
+            height: 0px;
+        }
+
+        @page {
+            margin: 20mm 0px;
+        }
+    }
+
+    .footnote-line {
+        margin-top: 0.714em;
+        font-size: 0.7em;
+    }
+
+    a img, img a {
+        cursor: pointer;
+    }
+
+    pre.md-meta-block {
+        font-size: 0.8rem;
+        min-height: 0.8rem;
+        white-space: pre-wrap;
+        background: rgb(204, 204, 204);
+        display: block;
+        overflow-x: hidden;
+    }
+
+    p > .md-image:only-child:not(.md-img-error) img, p > img:only-child {
+        display: block;
+        margin: auto;
+    }
+
+    p > .md-image:only-child {
+        display: inline-block;
+        width: 100%;
+    }
+
+    #write .MathJax_Display {
+        margin: 0.8em 0px 0px;
+    }
+
+    .md-math-block {
+        width: 100%;
+    }
+
+    .md-math-block:not(:empty)::after {
+        display: none;
+    }
+
+    [contenteditable="true"]:active, [contenteditable="true"]:focus {
+        outline: 0px;
+        box-shadow: none;
+    }
+
+    .md-task-list-item {
+        position: relative;
+        list-style-type: none;
+    }
+
+    .task-list-item.md-task-list-item {
+        padding-left: 0px;
+    }
+
+    .md-task-list-item > input {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        margin-left: -1.2em;
+        margin-top: calc(1em - 10px);
+    }
+
+    .math {
+        font-size: 1rem;
+    }
+
+    .md-toc {
+        min-height: 3.58rem;
+        position: relative;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+    .md-toc-content {
+        position: relative;
+        margin-left: 0px;
+    }
+
+    .md-toc-content::after, .md-toc::after {
+        display: none;
+    }
+
+    .md-toc-item {
+        display: block;
+        color: rgb(65, 131, 196);
+    }
+
+    .md-toc-item a {
+        text-decoration: none;
+    }
+
+    .md-toc-inner:hover {
+        text-decoration: underline;
+    }
+
+    .md-toc-inner {
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .md-toc-h1 .md-toc-inner {
+        margin-left: 0px;
+        font-weight: 700;
+    }
+
+    .md-toc-h2 .md-toc-inner {
+        margin-left: 2em;
+    }
+
+    .md-toc-h3 .md-toc-inner {
+        margin-left: 4em;
+    }
+
+    .md-toc-h4 .md-toc-inner {
+        margin-left: 6em;
+    }
+
+    .md-toc-h5 .md-toc-inner {
+        margin-left: 8em;
+    }
+
+    .md-toc-h6 .md-toc-inner {
+        margin-left: 10em;
+    }
+
+    @media screen and (max-width: 48em) {
+        .md-toc-h3 .md-toc-inner {
+            margin-left: 3.5em;
+        }
+
+        .md-toc-h4 .md-toc-inner {
+            margin-left: 5em;
+        }
+
+        .md-toc-h5 .md-toc-inner {
+            margin-left: 6.5em;
+        }
+
+        .md-toc-h6 .md-toc-inner {
+            margin-left: 8em;
+        }
+    }
+
+    a.md-toc-inner {
+        font-size: inherit;
+        font-style: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+    }
+
+    .footnote-line a:not(.reversefootnote) {
+        color: inherit;
+    }
+
+    .md-attr {
+        display: none;
+    }
+
+    .md-fn-count::after {
+        content: ".";
+    }
+
+    code, pre, samp, tt {
+        font-family: var(--monospace);
+    }
+
+    kbd {
+        margin: 0px 0.1em;
+        padding: 0.1em 0.6em;
+        font-size: 0.8em;
+        color: rgb(36, 39, 41);
+        background: rgb(255, 255, 255);
+        border: 1px solid rgb(173, 179, 185);
+        border-radius: 3px;
+        box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    .md-comment {
+        color: rgb(162, 127, 3);
+        opacity: 0.8;
+        font-family: var(--monospace);
+    }
+
+    code {
+        text-align: left;
+        vertical-align: initial;
+    }
+
+    a.md-print-anchor {
+        white-space: pre !important;
+        border-width: initial !important;
+        border-style: none !important;
+        border-color: initial !important;
+        display: inline-block !important;
+        position: absolute !important;
+        width: 1px !important;
+        right: 0px !important;
+        outline: 0px !important;
+        background: 0px 0px !important;
+        text-decoration: initial !important;
+        text-shadow: initial !important;
+    }
+
+    .md-inline-math .MathJax_SVG .noError {
+        display: none !important;
+    }
+
+    .html-for-mac .inline-math-svg .MathJax_SVG {
+        vertical-align: 0.2px;
+    }
+
+    .md-math-block .MathJax_SVG_Display {
+        text-align: center;
+        margin: 0px;
+        position: relative;
+        text-indent: 0px;
+        max-width: none;
+        max-height: none;
+        min-height: 0px;
+        min-width: 100%;
+        width: auto;
+        overflow-y: hidden;
+        display: block !important;
+    }
+
+    .MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display {
+        width: auto;
+        margin: inherit;
+        display: inline-block !important;
+    }
+
+    .MathJax_SVG .MJX-monospace {
+        font-family: var(--monospace);
+    }
+
+    .MathJax_SVG .MJX-sans-serif {
+        font-family: sans-serif;
+    }
+
+    .MathJax_SVG {
+        display: inline;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        zoom: 90%;
+        text-indent: 0px;
+        text-align: left;
+        text-transform: none;
+        letter-spacing: normal;
+        word-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        float: none;
+        direction: ltr;
+        max-width: none;
+        max-height: none;
+        min-width: 0px;
+        min-height: 0px;
+        border: 0px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .MathJax_SVG * {
+        transition: none;
+    }
+
+    .MathJax_SVG_Display svg {
+        vertical-align: middle !important;
+        margin-bottom: 0px !important;
+    }
+
+    .os-windows.monocolor-emoji .md-emoji {
+        font-family: "Segoe UI Symbol", sans-serif;
+    }
+
+    .md-diagram-panel > svg {
+        max-width: 100%;
+    }
+
+    [lang="mermaid"] svg, [lang="flow"] svg {
+        max-width: 100%;
+    }
+
+    [lang="mermaid"] .node text {
+        font-size: 1rem;
+    }
+
+    table tr th {
+        border-bottom: 0px;
+    }
+
+    video {
+        max-width: 100%;
+        display: block;
+        margin: 0px auto;
+    }
+
+    iframe {
+        max-width: 100%;
+        width: 100%;
+        border: none;
+    }
+
+    .highlight td, .highlight tr {
+        border: 0px;
+    }
+
+
+    :root {
+        --side-bar-bg-color: #fafafa;
+        --control-text-color: #777;
+    }
+
+    html {
+        font-size: 16px;
+    }
+
+    body {
+        font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: rgb(51, 51, 51);
+        line-height: 1.6;
+    }
+
+    #write {
+        max-width: 860px;
+        margin: 0px auto;
+        padding: 0px 20px 50px;
+    }
+
+    #write > ul:first-child, #write > ol:first-child {
+        margin-top: 30px;
+    }
+
+    a {
+        color: rgb(65, 131, 196);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        position: relative;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+        line-height: 1.4;
+        cursor: text;
+    }
+
+    h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+        text-decoration: none;
+    }
+
+    h1 tt, h1 code {
+        font-size: inherit;
+    }
+
+    h2 tt, h2 code {
+        font-size: inherit;
+    }
+
+    h3 tt, h3 code {
+        font-size: inherit;
+    }
+
+    h4 tt, h4 code {
+        font-size: inherit;
+    }
+
+    h5 tt, h5 code {
+        font-size: inherit;
+    }
+
+    h6 tt, h6 code {
+        font-size: inherit;
+    }
+
+    h1 {
+        padding-bottom: 0.1em;
+        font-size: 2.25em;
+        line-height: 1.2;
+        border-bottom: 1px solid rgb(238, 238, 238);
+    }
+
+    h2 {
+        padding-bottom: 0.3em;
+        font-size: 1.75em;
+        line-height: 1.225;
+        border-bottom: 1px solid rgb(238, 238, 238);
+    }
+
+    h3 {
+        font-size: 1.5em;
+        line-height: 1.43;
+    }
+
+    h4 {
+        font-size: 1.25em;
+    }
+
+    h5 {
+        font-size: 1em;
+    }
+
+    h6 {
+        font-size: 1em;
+        color: rgb(119, 119, 119);
+    }
+
+    p, blockquote, ul, ol, dl, table {
+        margin: 0.8em 0px;
+    }
+
+    li > ol, li > ul {
+        margin: 0px;
+    }
+
+    hr {
+        height: 2px;
+        padding: 0px;
+        margin: 16px 0px;
+        background-color: rgb(231, 231, 231);
+        border: 0px none;
+        overflow: hidden;
+        box-sizing: content-box;
+    }
+
+    li p.first {
+        display: inline-block;
+    }
+
+    ul, ol {
+        padding-left: 30px;
+    }
+
+    ul:first-child, ol:first-child {
+        margin-top: 0px;
+    }
+
+    ul:last-child, ol:last-child {
+        margin-bottom: 0px;
+    }
+
+    blockquote {
+        border-left: 4px solid rgb(223, 226, 229);
+        padding: 0px 15px;
+        color: rgb(119, 119, 119);
+    }
+
+    blockquote blockquote {
+        padding-right: 0px;
+    }
+
+    table {
+        padding: 0px;
+        word-break: initial;
+    }
+
+    table tr {
+        border-top: 1px solid rgb(223, 226, 229);
+        margin: 0px;
+        padding: 0px;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: rgb(248, 248, 248);
+    }
+
+    table tr th {
+        font-weight: bold;
+        border-width: 1px 1px 0px;
+        border-top-style: solid;
+        border-right-style: solid;
+        border-left-style: solid;
+        border-top-color: rgb(223, 226, 229);
+        border-right-color: rgb(223, 226, 229);
+        border-left-color: rgb(223, 226, 229);
+        border-image: initial;
+        border-bottom-style: initial;
+        border-bottom-color: initial;
+        text-align: left;
+        margin: 0px;
+        padding: 6px 13px;
+    }
+
+    table tr td {
+        border: 1px solid rgb(223, 226, 229);
+        text-align: left;
+        margin: 0px;
+        padding: 6px 13px;
+    }
+
+    table tr th:first-child, table tr td:first-child {
+        margin-top: 0px;
+    }
+
+    table tr th:last-child, table tr td:last-child {
+        margin-bottom: 0px;
+    }
+
+    .CodeMirror-lines {
+        padding-left: 4px;
+    }
+
+    .code-tooltip {
+        box-shadow: rgba(0, 28, 36, 0.3) 0px 1px 1px 0px;
+        border-top: 1px solid rgb(238, 242, 242);
+    }
+
+    .md-fences, code, tt {
+        border: 1px solid rgb(231, 234, 237);
+        background-color: rgb(248, 248, 248);
+        border-radius: 3px;
+        padding: 2px 4px 0px;
+        font-size: 0.9em;
+    }
+
+    code {
+        background-color: rgb(243, 244, 244);
+        padding: 0px 2px;
+    }
+
+    .md-fences {
+        margin-bottom: 15px;
+        margin-top: 15px;
+        padding-top: 8px;
+        padding-bottom: 6px;
+    }
+
+    .md-task-list-item > input {
+        margin-left: -1.3em;
+    }
+
+    @media print {
+        html {
+            font-size: 13px;
+        }
+
+        table, pre {
+            break-inside: avoid;
+        }
+
+        pre {
+            word-wrap: break-word;
+        }
+    }
+
+    .md-fences {
+        background-color: rgb(248, 248, 248);
+    }
+
+    #write pre.md-meta-block {
+        padding: 1rem;
+        font-size: 85%;
+        line-height: 1.45;
+        background-color: rgb(247, 247, 247);
+        border: 0px;
+        border-radius: 3px;
+        color: rgb(119, 119, 119);
+        margin-top: 0px !important;
+    }
+
+    .mathjax-block > .code-tooltip {
+        bottom: 0.375rem;
+    }
+
+    .md-mathjax-midline {
+        background: rgb(250, 250, 250);
+    }
+
+    #write > h3.md-focus::before {
+        left: -1.5625rem;
+        top: 0.375rem;
+    }
+
+    #write > h4.md-focus::before {
+        left: -1.5625rem;
+        top: 0.285714rem;
+    }
+
+    #write > h5.md-focus::before {
+        left: -1.5625rem;
+        top: 0.285714rem;
+    }
+
+    #write > h6.md-focus::before {
+        left: -1.5625rem;
+        top: 0.285714rem;
+    }
+
+    .md-image > .md-meta {
+        border-radius: 3px;
+        padding: 2px 0px 0px 4px;
+        font-size: 0.9em;
+        color: inherit;
+    }
+
+    .md-tag {
+        color: rgb(167, 167, 167);
+        opacity: 1;
+    }
+
+    .md-toc {
+        margin-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .sidebar-tabs {
+        border-bottom: none;
+    }
+
+    #typora-quick-open {
+        border: 1px solid rgb(221, 221, 221);
+        background-color: rgb(248, 248, 248);
+    }
+
+    #typora-quick-open-item {
+        background-color: rgb(250, 250, 250);
+        border-color: rgb(254, 254, 254) rgb(229, 229, 229) rgb(229, 229, 229) rgb(238, 238, 238);
+        border-style: solid;
+        border-width: 1px;
+    }
+
+    .on-focus-mode blockquote {
+        border-left-color: rgba(85, 85, 85, 0.12);
+    }
+
+    header, .context-menu, .megamenu-content, footer {
+        font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    .file-node-content:hover .file-node-icon, .file-node-content:hover .file-node-open-state {
+        visibility: visible;
+    }
+
+    .mac-seamless-mode #typora-sidebar {
+        background-color: var(--side-bar-bg-color);
+    }
+
+    .md-lang {
+        color: rgb(180, 101, 77);
+    }
+
+    .html-for-mac .context-menu {
+        --item-hover-bg-color: #E6F0FE;
+    }
+
+    #md-notification .btn {
+        border: 0px;
+    }
+
+    .dropdown-menu .divider {
+        border-color: rgb(229, 229, 229);
+    }
+
+
+    .typora-export li, .typora-export p, .typora-export, .footnote-line {
+        white-space: normal;
+    }
+    </style>
+</head>
+<body class='typora-export'>
+<div id="content">
+    <div id="logo">
+        <p style="left: 162px; top: 9px; padding:0 2px 2px;font-size: 14px;">基于校园一卡通数据的用户画像分析展示</p>
+        <h1 class="school"><strong>国际关系学院</strong></h1>
+        <h1>校园一卡通数据用户画像分析</h1>
+    </div>
+    <div class="uir"><img src="images/UIR0.png" alt="校徽" height=60px /></div>
+    <ul id="menu">
+        <li><a href="index.html">介绍</a></li>
+        <li><a href="libr.html">图书馆</a></li>
+        <li><a class="current" href="canteen.html">食堂</a></li>
+        <li><a href="bathroom.html">浴室</a></li>
+        <li><a href="end.html">总结</a></li>
+    </ul>
+    <div class="clear">
+        <!--<p>&nbsp;</p>-->
+        <p><br/>
+        </p>
+    </div>
+
+    <div id="left">
+        <div class="caption"><p>索引</p></div>
+        <div class="box">
+            <ul>
+                <li><a href="#header-n2">各楼层窗口销售量与销售额对比分析</a></li>
+                <li><a href="#header-n7">一楼</a></li>
+                <li><a href="#header-n33">二楼</a></li>
+                <li><a href="#header-n86">一天中就餐时间分布分析</a></li>
+                <li><a href="#header-n126">建议</a></li>
+                <li><a href="#header-n172">学生就餐习惯分析</a></li>
+                <li><a href="#header-n236">三餐就餐时间<br>平均方差分布分析</a></li>
+                <li><a href="canteen.html">回顶部</a></li>
+            </ul>
+        </div>
+    </div>
+<div id='write' class='is-node' style="border-right: 1px solid #B5D6FC;"><h1><a name='header-n0' class='md-header-anchor '></a>食堂数据分析</h1>
+    <p>我们对于食堂数据的分析，主要通过三个方面进行阐述：</p>
+    <ol>
+        <li>我们将根据各楼层窗口销售量与销售额对比分析，为食堂菜系规划提供建议；</li>
+        <li>我们将根据一天中就餐时间分布分析，为同学们错峰就餐提供建议；</li>
+        <li>我们将根据学生就餐习惯分析，为学校教务处和食堂提供建议。</li>
+    </ol>
+    <p>&nbsp;</p>
+    <h2><a name='header-n2' class='md-header-anchor '></a>各楼层窗口销售量与销售额对比分析</h2>
+    <p><span>	</span>首先，为发掘不同食堂消费窗口的特点，我们实地调查了食堂各窗口的pos机号对应售卖的菜品，一楼和二楼的菜品分布如下表：</p>
+    <p><img src='charts/canteen/poscan.png' alt='pos' referrerPolicy='no-referrer'/></p>
+    <p>&nbsp;</p>
+    <h3><a name='header-n7' class='md-header-anchor '></a>一楼</h3>
+    <p>下图为食堂一楼各窗口的销售量与平均消费金额的对比图：</p>
+    <p><img src='charts/canteen/can1.png' alt='can1' referrerPolicy='no-referrer'/></p>
+    <p>&nbsp;</p>
+    <p>由上图我们可以得出同学们在食堂各窗口消费的特点：</p>
+    <ul>
+        <li>焖锅汤锅的消费水平最高，加上要等待的时间较长，造成销售量较低，建议降价销售；</li>
+        <li>销售量最高的窗口是小卖部的窗口，它的平均消费金额较低，同学们光顾的会比较多；</li>
+        <li>基本伙食和黄焖鸡的销量较大，经调查得知同学们对黄焖鸡比较喜爱，造成了虽然需要等待时间但仍然销售量不减的情况，食堂可以推进黄焖鸡口味的发展；</li>
+        <li>石锅拌饭的销售量最低，原因是等待时间过长，且消费水平较高，一般在时间充裕并且余额充足的情况下才会选择就餐。</li>
+        <li>其余窗口一般由于菜品都为成品，售卖速度较快，避免了排队，易受大家喜爱。</li>
+    </ul>
+    <p>&nbsp;</p>
+    <h3><a name='header-n33' class='md-header-anchor '></a>二楼</h3>
+    <p>以下为食堂二楼一年内的各窗口销售量和平均消费金额对比图：</p>
+    <p><img src='charts/canteen/c21.png' alt='can20' referrerPolicy='no-referrer'/></p>
+    <p>&nbsp;</p>
+    <ul>
+        <li><p>我们发现食堂二楼的窗口1消费人数少，消费金额明显高于其他各个窗口，考察后发现，该窗口是麻辣香锅窗口，由于15元起售的特点，导致窗口的平均销售额将近20元；</p>
+            <p>&nbsp;</p></li>
+    </ul>
+    <p>由于窗口1的消费金额明显超过其他窗口的平均金额，因此排除窗口1的高消费数据干扰后，</p>
+    <p>食堂二楼的销售情况如下：</p>
+    <p><img src='charts/canteen/c22.png' alt='can21' referrerPolicy='no-referrer'/></p>
+    <p>&nbsp;</p>
+    <p>由此我们可以得出结论：</p>
+    <ul>
+        <li>米线窗口18的销售量最大，原因可能是价格实惠并且口味适合大多数人，而现在这个窗口已经消失了，经过调查得知很多同学都很怀念，因此我们建议学校能坚持开米线的窗口；</li>
+        <li>
+            清真食堂窗口17价格较高但销售量仍然很大，经调查得知同学们反映其他窗口的口味大都差不多，吃久了容易腻，而清真食堂的口味则截然不同，往往更能激发同学们的食欲。因此尽管清真食堂价格昂贵，同学们仍愿意选择去清真食堂就餐，由此可以看出食堂菜品口味的重要性；
+        </li>
+        <li>
+            同样消费水平在十元左右的韩式扒饭、麻辣烫、烤肉拌饭窗口的消费量依次下降，且韩式扒饭远高于后者，原因是韩式扒饭的菜品种类多，口味较基本伙食好，而麻辣烫虽口味不错，由于现做造成的等待时间过长，大多时间匆忙的同学不会选择就餐，烤肉拌饭则因为菜种稀少，可选择余地过少，造成同学们并不愿意一直在此窗口就餐，容易吃腻；由此看出菜品种类、等待时间对于提升一个窗口销售额的重要性；
+        </li>
+        <li>基本伙食销售量偏好的窗口大多位于食堂正中间，反映了同学们就餐图方便的一般特性，一个窗口的位置也很能影响它的消费水平。</li>
+    </ul>
+    <p>&nbsp;</p>
+    <hr/>
+    <h2><a name='header-n86' class='md-header-anchor '></a>一天中就餐时间分布分析</h2>
+    <p>下面是学生就餐时间分布图：</p>
+    <p><img src='charts/canteen/学生就餐时间分布.png' alt='cantime'
+            referrerPolicy='no-referrer'/></p>
+    <p>&nbsp;</p>
+    <p>从上图中我们可以看出：</p>
+    <ul>
+        <li>
+            早餐主要集中在7：50左右，即早课前的几分钟。大家会购买早餐带到教室食用，由此可见大部分人没办法做到提前早起在食堂吃早饭。7点之后的早饭小高峰，主要原因是升旗和早操。大一和大二的同学们升旗之后都会在食堂吃过早饭。九点和十点之后的小高峰，主要由于早上8点前来不及去食堂吃早餐的同学们会选择下课赶去食堂购买早餐。
+        </li>
+        <li>午餐的高峰在12点后，同学们刚下课，全部涌到食堂吃饭。而没有第四节课的同学大多会选择11:40左右开始去食堂就餐，造成次高峰。</li>
+        <li>晚餐的分布情况较为平和，不存在过多的拥挤问题，高峰主要集中在18:15~18:35左右。</li>
+    </ul>
+    <h3><a name='header-n126' class='md-header-anchor '></a>建议</h3>
+    <ul>
+        <li><p>对同学们：</p>
+            <ul>
+                <li><p>同学们如果对于打饭速度有着较高的追求，则应选择错峰就餐，具体错开时间段为：</p>
+                    <ul>
+                        <li>早餐：7:50前后，即早课之前的十分钟内；</li>
+                        <li>午餐：第四节课刚下课（12:05~12:20）；</li>
+                        <li>晚餐：第九节课刚下课（18:00左右）、第十节课上课前的半个小时内（18:15~18:35左右）。</li>
+                    </ul>
+                </li>
+                <li><p>具体要求有早课的同学们做到尽量早起，提前去食堂就餐；上午第四节有课的同学们可以错开刚下课的时间就餐；对于没有第九节课的同学尽量提早在六点以前去食堂就餐。</p></li>
+            </ul>
+        </li>
+        <li><p>对学校食堂：</p>
+            <ul>
+                <li>学校可以在以上三餐的高峰时间点做好相应措施，比如提前准备好充足的饭菜成品、在高峰分配更多的工作人员为同学们打菜、准备更多的桌椅等，以避免发生拥挤、找不到座位等现象。</li>
+                <li>
+                    值得食堂注意的是在次高峰要提前安排更多地工作人员为同学们打菜，比如早上9点、10点（这个时间段食堂往往会因为较长一段时间就餐人数少而容易出现工作人短缺的情况，但是同学们则大都很赶时间）、中午11:30之后开始增加人手等。
+                </li>
+            </ul>
+        </li>
+        <li><p>对学校：</p>
+            <ul>
+                <li>由晚餐就餐时间分布可知，因为许多同学第八节课就可以结束下午的课程，食堂不存在太大关于晚高峰就餐的问题，而午餐则存在明显高峰期。因此学校可以考虑延长午休时间，这样也会适当缓解高峰现象。</li>
+            </ul>
+        </li>
+    </ul>
+    <p>&nbsp;</p>
+    <h2><a name='header-n172' class='md-header-anchor '></a>学生就餐习惯分析</h2>
+    <p>以下分别为一、二层食堂三餐的营业额和销售量的周分布图：</p>
+    <p><img src='charts/canteen/食堂1层三餐营业额周分布.png' alt='can1mon'
+           width="350" style="float: left;margin-right:5px;" referrerPolicy='no-referrer'/></p>
+    <p><img src='charts/canteen/食堂2层三餐营业额周分布.png' alt='can2mon' width="350"
+                style="float: right;margin-right: -10px"
+            referrerPolicy='no-referrer'/></p>
+    <p><img src='charts/canteen/食堂1层三餐消费次数周分布.png' alt='can1c' width="350"
+                style="float: left;margin-right:5px;"
+            referrerPolicy='no-referrer'/></p>
+    <p><img src='charts/canteen/食堂2层三餐消费次数周分布.png' alt='can2c' width="350"
+                style="float: right;margin-right: -10px"
+            referrerPolicy='no-referrer'/></p>
+    <p>&nbsp;</p>
+    <ul>
+        <li><p>分别对比：</p>
+            <ul>
+                <li>
+                    从一楼食堂三餐的营业额与销售量来看，由于早餐同学们往往会在多个窗口购买早餐，造成早上所统计的消费次数会在实际消费人数可能不如午餐晚餐的情况下，早餐销售次数高于二餐。很多同学由于工作日早晨时间紧张，来不及点外卖或出去吃，所以在周一到周五，早饭的销售人次会高于周末。而周末大家会存在睡懒觉的情况，所以吃早饭的人数大大下降。由于早餐价格较便宜，因此即使购买人数很多，但销售额仍低于午饭和晚饭。
+                </li>
+                <li>
+                    从二楼食堂三餐的营业额与销售量来看，二楼早餐十分不受同学们欢迎，原因是早上时间比较匆忙，同学们往往为了按时上课而放弃早餐爬楼。二楼的晚餐营业额比一楼的晚餐营业额高，原因是二楼各窗口的消费水平较高。二楼午餐的销售量远大于晚餐。可能二楼晚餐更新程度没有午餐那么好，并不能很好的吸引大家就餐。建议二楼加大早餐丰盛力度，不断提升早餐质量。也呼吁同学们多去二楼吃早饭，避免拥挤。
+                </li>
+            </ul>
+        </li>
+        <li><p>两层互相对比：</p>
+            <ul>
+                <li>整体看来，同学们中餐的消费最大，晚上可能由于洗澡上课没时间吃、减肥不吃晚饭或是外出用餐等原因造成销售量减少，因此学校可以在晚餐推出好吃新鲜的菜品激发同学们的晚餐兴趣来提升消费量。</li>
+                <li>
+                    同学们午餐晚餐用餐的人次从周四开始到周六达到了最低值，说明大多数同学会选择在周六放松自己，外出用餐或是点外卖，而周日开始准备绷紧神经再一次加入到紧张的一周中来，说明国关的同学们很懂得劳逸结合，有松有驰。
+                </li>
+                <li>
+                    此外需要指出的是，从周四开始，早餐的消费人次和销售额都持续下降，这从侧面反映出同学们的持续精力在每一周的周四到达极限，从周五开始同学们会开始变得浮躁，更多的选择出去吃饭或者点外卖来犒劳自己的身心，到达劳逸结合的目的。
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ul>
+        <li><p>给学校教务处的建议：</p>
+            <p>
+                由我们通过分析同学们一周内在食堂的消费次数，推测出同学们在周五时容易浮躁，由此建议学校教务处在排课的时候，尽量不要把非常重要的专业课等排在周五，而应该把大多数通识选修等轻松愉悦的课程排在周五，从而能让师生能在一个更好的氛围中度过。</p>
+        </li>
+    </ul>
+    <p>&nbsp;</p>
+    <h3><a name='header-n236' class='md-header-anchor '></a>三餐就餐时间平均方差分布分析</h3>
+    <p><img src='charts/canteen/就餐方差分布.png' alt='variance'
+            referrerPolicy='no-referrer'/></p>
+    <p>&nbsp;</p>
+    <ul>
+        <li><p>分析</p>
+            <ul>
+                <li>由同学们的就餐时间平均方差分布可知，大多数同学的就餐时间比较有规律，经综合分析得出，大多数就餐时间规律的同学往往较多集中于高峰进行就餐，而高峰时间往往和下课时间密切相关</li>
+            </ul>
+        </li>
+        <li><p>结论和建议</p>
+            <ul>
+                <li>
+                    我们发现，课程的分布对同学们的就餐规律性有着较大的促进作用，上课会促进同学们的规律就餐和健康生活习惯的养成，学校可以通过合理调整上课时间来调整同学们的作息，尽量向有益于同学们的健康的方向调整。但另一方面，上课时间同样会对食堂就餐高峰带来较大的影响，要求食堂规划和学校课程安排时间也有一定的平衡，这方面需要学校进行更为合理的协调。
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <div id="footer">
+        <div id="fl">
+            <p>&copy; 李陈依 . 宿汉辰 . 刘嘉青 . 毛羽哲 . 王泽坤 .</p>
+        </div>
+    </div>
+    </div>
+</div>
+</body>
+</html>
